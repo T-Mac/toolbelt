@@ -67,6 +67,20 @@ Description: Client library and command-line tool to manage and deploy Rails app
 Standards-Version: 3.9.1
 Homepage: http://heroku.com/
 
+Package: heroku-toolbelt
+Priority: standard
+Section: main
+Maintainer: Heroku
+Architecture: all
+Version: 0.1
+Depends: ruby1.8, rubygems1.8, rubygems-heroku, git
+Filename: ./heroku-toolbelt_0.0.1_all.deb
+Size: 572
+MD5sum: 5e1d8e5765cbac0a6919f065f6447520
+SHA1: 7f4893bed2022e62ad0b10abc1bb30149f885ec5
+SHA256: e8ab94278d37b8e3ed78051207f598fb8c0d4fb18cf0de5e4277747d2ac62f7e
+Description: Heroku Toolbelt
+
 Package: rubygem-mime-types
 Priority: extra
 Section: Languages/Development/Ruby
