@@ -19,5 +19,5 @@ class Toolbelt < Sinatra::Base
 
 end
 
-use Rack::Static, :root => File.expand_path("../public", __FILE__)
+use Rack::Static, :root => "public"
 run Toolbelt
