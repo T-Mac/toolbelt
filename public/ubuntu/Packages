@@ -73,12 +73,12 @@ Section: main
 Maintainer: Heroku
 Architecture: all
 Version: 0.1
-Depends: ruby1.8, rubygems1.8, rubygems-heroku, git
+Depends: ruby1.8, rubygems1.8, rubygem-heroku, git
 Filename: ./heroku-toolbelt_0.0.1_all.deb
 Size: 572
-MD5sum: 5e1d8e5765cbac0a6919f065f6447520
-SHA1: 7f4893bed2022e62ad0b10abc1bb30149f885ec5
-SHA256: e8ab94278d37b8e3ed78051207f598fb8c0d4fb18cf0de5e4277747d2ac62f7e
+MD5sum: a7ca6349fde3216e6e5e5bc54a2deb33
+SHA1: 2f5e4ce610285b5ed60dad33dd51601f24556c76
+SHA256: f816f04476e5875a6c83d2a1c1b860e0f9e3677c775f01c5c8449fdd74c253c8
 Description: Heroku Toolbelt
 
 Package: rubygem-mime-types
