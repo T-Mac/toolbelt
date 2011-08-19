@@ -1,7 +1,6 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    asset-resource (0.5.0)
     buckshot (0.2.0)
       shotgun
       thin
@@ -24,7 +23,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  asset-resource
   buckshot
   haml
   sinatra
