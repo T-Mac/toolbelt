@@ -6,17 +6,11 @@ Architecture: all
 Version: 2.0.5
 Depends: rubygem-addressable (>= 2.2.6), rubygem-addressable (<< 2.3.0)
 Filename: ./rubygem-launchy_2.0.5_all.deb
-Size: 37198
-MD5sum: 3b9d08c5b9ea9b13ce6554851c1fd569
-SHA1: f84628f4143a9adba158b09a96722c8a41ac182c
-SHA256: 0e7abc7f0d70af85863e5d83fbe8c9103023b646432909818c8985b26d6e4720
-Description: Launchy is helper class for launching cross-platform applications in a
- fire and forget manner.
- .
- There are application concepts (browser, email client, etc) that are
- common across all platforms, and they may be launched differently on
- each platform.  Launchy is here to make a common approach to launching
- external application from within ruby programs.
+Size: 37016
+MD5sum: 83c7395f92e996be8c5a7a8f120dfb64
+SHA1: d2feffb0a91f2665546b3b419cb62a684827bbd1
+SHA256: 5b97d7a35012e32653e83e7d617d809036d6e9924eab8aad411793fa53c155ad
+Description: no description given
 Standards-Version: 3.9.1
 Homepage: http://www.copiousfreetime.org/projects/launchy
 
@@ -28,11 +22,11 @@ Architecture: all
 Version: 1.6.3
 Depends: rubygem-mime-types (>= 1.16)
 Filename: ./rubygem-rest-client_1.6.3_all.deb
-Size: 110856
-MD5sum: d87669728b6ec63dddb3e550605269bc
-SHA1: 401113e6bf489e94cec7249769b45fad8fe489ce
-SHA256: ea73fa9a9420bcf863414573bb7ed664447411696482baf9f1b1794798e0afc7
-Description: A simple HTTP and REST client for Ruby, inspired by the Sinatra microframework style of specifying actions: get, put, post, delete.
+Size: 110828
+MD5sum: 421bee21076903c68aacc89139beb7b4
+SHA1: 9c2ca3ab3d7af959f8f9f1173fb88060111bf7bd
+SHA256: a0d5cf27fd38959dcac158fb1b1ca1b5a8009defc7181d62eb7f95b856afebb5
+Description: no description given
 Standards-Version: 3.9.1
 Homepage: http://github.com/archiloque/rest-client
 
@@ -43,11 +37,11 @@ Maintainer: Florian Frank
 Architecture: all
 Version: 1.0.6
 Filename: ./rubygem-term-ansicolor_1.0.6_all.deb
-Size: 29416
-MD5sum: 817a875fe8dbe927f701b46930820fe6
-SHA1: 5f2953c33350eee2b7ef99363ca50834aab2b748
-SHA256: 97d80606e88cfb84974f4d95b700aa9f773a08e7d30fb94da2b8ab451e9f5385
-Description: 
+Size: 29474
+MD5sum: d2b8184788b54701cd8694b1d91c1753
+SHA1: a36f52277c9548a057329ac15ac49bdc680e7a26
+SHA256: 3444a41ff7e1ae1ce8a79c596690e2bbd2455010a46711450d6519ce57338d5f
+Description: no description given
 Standards-Version: 3.9.1
 Homepage: http://flori.github.com/term-ansicolor
 
@@ -59,11 +53,11 @@ Architecture: all
 Version: 2.4.2
 Depends: rubygem-term-ansicolor (>= 1.0.5), rubygem-term-ansicolor (<< 1.1.0), rubygem-rest-client (>= 1.6.1), rubygem-rest-client (<< 1.7.0), rubygem-launchy (>= 0.3.2)
 Filename: ./rubygem-heroku_2.4.2_all.deb
-Size: 389012
-MD5sum: c4d68f28aeb294d904a551c8b72624c8
-SHA1: 86322f52074bcb8944611b92c8d8725ecc035b4e
-SHA256: f277d8c0ecf7d1d57cf85a9cc111886f1423aefa9c218a2ad6f4c671f9ed323c
-Description: Client library and command-line tool to manage and deploy Rails apps on Heroku.
+Size: 389022
+MD5sum: 5bdcc53f87601d18ef3963ba2585cb0e
+SHA1: 7844a3f4fe5d6bff1d0840ede5f9940396c11915
+SHA256: ffd539f43bb4c3734dd85b62a1e759744bd3d899e48cd301d61719cab8d53324
+Description: no description given
 Standards-Version: 3.9.1
 Homepage: http://heroku.com/
 
@@ -88,11 +82,11 @@ Maintainer: Austin Ziegler
 Architecture: all
 Version: 1.16
 Filename: ./rubygem-mime-types_1.16_all.deb
-Size: 86920
-MD5sum: 8bf36360ac3ef01eb85d30075e06bf1a
-SHA1: 3a4286e7d25ce88d163f6a8713c03ad9e7dff7c1
-SHA256: 678b213ddf28c78614115a4577376c87bc370dbcb2a52a3845154b4ed6690cee
-Description: MIME::Types for Ruby originally based on and synchronized with MIME::Types for Perl by Mark Overmeer, copyright 2001 - 2009. As of version 1.15, the data format for the MIME::Type list has changed and the synchronization will no longer happen.
+Size: 86832
+MD5sum: aded42f142ee416fc86f40a3df7032bb
+SHA1: f01f1bc1d6f5214d57afbd101fed18929726069d
+SHA256: 6c774987ea39343cd7ff01c05e0760da6387a2ac2ae8e56465765038df3a0156
+Description: no description given
 Standards-Version: 3.9.1
 Homepage: http://mime-types.rubyforge.org/
 
@@ -103,13 +97,11 @@ Maintainer: Bob Aman
 Architecture: all
 Version: 2.2.6
 Filename: ./rubygem-addressable_2.2.6_all.deb
-Size: 192174
-MD5sum: 8284a956b00e404f5d17a97cbaeb3667
-SHA1: ad1f6fabd56b2846c83bd5cd3b5cfed0357a1d5c
-SHA256: 4598aa34005054f7670ae3d294bc2d9ff15d3964d2b0a8c993176313dec5081d
-Description: Addressable is a replacement for the URI implementation that is part of
- Ruby's standard library. It more closely conforms to the relevant RFCs and
- adds support for IRIs and URI templates.
+Size: 192120
+MD5sum: 0e684b244e4a52df46983d84625c6eb4
+SHA1: bea69a810990aa07675b07ebba74f2d6f25845ec
+SHA256: 4647c36789d7a94bba2c916b052495d3905646befa9d425b3069611e1a4a9c7f
+Description: no description given
 Standards-Version: 3.9.1
 Homepage: http://addressable.rubyforge.org/
 
