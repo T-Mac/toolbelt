@@ -19,5 +19,5 @@ class Toolbelt < Sinatra::Base
 
 end
 
-use Rack::Static, :root => "public"
+use Rack::Static, :urls => %w( ubuntu ), :root => "public"
 run Toolbelt
