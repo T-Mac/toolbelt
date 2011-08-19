@@ -1,0 +1,101 @@
+Package: rubygem-launchy
+Priority: extra
+Section: Languages/Development/Ruby
+Maintainer: Jeremy Hinegardner
+Architecture: all
+Version: 2.0.5
+Depends: rubygem-addressable (>= 2.2.6), rubygem-addressable (<< 2.3.0)
+Filename: ./rubygem-launchy_2.0.5_all.deb
+Size: 37198
+MD5sum: 3b9d08c5b9ea9b13ce6554851c1fd569
+SHA1: f84628f4143a9adba158b09a96722c8a41ac182c
+SHA256: 0e7abc7f0d70af85863e5d83fbe8c9103023b646432909818c8985b26d6e4720
+Description: Launchy is helper class for launching cross-platform applications in a
+ fire and forget manner.
+ .
+ There are application concepts (browser, email client, etc) that are
+ common across all platforms, and they may be launched differently on
+ each platform.  Launchy is here to make a common approach to launching
+ external application from within ruby programs.
+Standards-Version: 3.9.1
+Homepage: http://www.copiousfreetime.org/projects/launchy
+
+Package: rubygem-rest-client
+Priority: extra
+Section: Languages/Development/Ruby
+Maintainer: Adam Wiggins
+Architecture: all
+Version: 1.6.3
+Depends: rubygem-mime-types (>= 1.16)
+Filename: ./rubygem-rest-client_1.6.3_all.deb
+Size: 110856
+MD5sum: d87669728b6ec63dddb3e550605269bc
+SHA1: 401113e6bf489e94cec7249769b45fad8fe489ce
+SHA256: ea73fa9a9420bcf863414573bb7ed664447411696482baf9f1b1794798e0afc7
+Description: A simple HTTP and REST client for Ruby, inspired by the Sinatra microframework style of specifying actions: get, put, post, delete.
+Standards-Version: 3.9.1
+Homepage: http://github.com/archiloque/rest-client
+
+Package: rubygem-term-ansicolor
+Priority: extra
+Section: Languages/Development/Ruby
+Maintainer: Florian Frank
+Architecture: all
+Version: 1.0.6
+Filename: ./rubygem-term-ansicolor_1.0.6_all.deb
+Size: 29416
+MD5sum: 817a875fe8dbe927f701b46930820fe6
+SHA1: 5f2953c33350eee2b7ef99363ca50834aab2b748
+SHA256: 97d80606e88cfb84974f4d95b700aa9f773a08e7d30fb94da2b8ab451e9f5385
+Description: 
+Standards-Version: 3.9.1
+Homepage: http://flori.github.com/term-ansicolor
+
+Package: rubygem-heroku
+Priority: extra
+Section: Languages/Development/Ruby
+Maintainer: Heroku
+Architecture: all
+Version: 2.4.2
+Depends: rubygem-term-ansicolor (>= 1.0.5), rubygem-term-ansicolor (<< 1.1.0), rubygem-rest-client (>= 1.6.1), rubygem-rest-client (<< 1.7.0), rubygem-launchy (>= 0.3.2)
+Filename: ./rubygem-heroku_2.4.2_all.deb
+Size: 389012
+MD5sum: c4d68f28aeb294d904a551c8b72624c8
+SHA1: 86322f52074bcb8944611b92c8d8725ecc035b4e
+SHA256: f277d8c0ecf7d1d57cf85a9cc111886f1423aefa9c218a2ad6f4c671f9ed323c
+Description: Client library and command-line tool to manage and deploy Rails apps on Heroku.
+Standards-Version: 3.9.1
+Homepage: http://heroku.com/
+
+Package: rubygem-mime-types
+Priority: extra
+Section: Languages/Development/Ruby
+Maintainer: Austin Ziegler
+Architecture: all
+Version: 1.16
+Filename: ./rubygem-mime-types_1.16_all.deb
+Size: 86920
+MD5sum: 8bf36360ac3ef01eb85d30075e06bf1a
+SHA1: 3a4286e7d25ce88d163f6a8713c03ad9e7dff7c1
+SHA256: 678b213ddf28c78614115a4577376c87bc370dbcb2a52a3845154b4ed6690cee
+Description: MIME::Types for Ruby originally based on and synchronized with MIME::Types for Perl by Mark Overmeer, copyright 2001 - 2009. As of version 1.15, the data format for the MIME::Type list has changed and the synchronization will no longer happen.
+Standards-Version: 3.9.1
+Homepage: http://mime-types.rubyforge.org/
+
+Package: rubygem-addressable
+Priority: extra
+Section: Languages/Development/Ruby
+Maintainer: Bob Aman
+Architecture: all
+Version: 2.2.6
+Filename: ./rubygem-addressable_2.2.6_all.deb
+Size: 192174
+MD5sum: 8284a956b00e404f5d17a97cbaeb3667
+SHA1: ad1f6fabd56b2846c83bd5cd3b5cfed0357a1d5c
+SHA256: 4598aa34005054f7670ae3d294bc2d9ff15d3964d2b0a8c993176313dec5081d
+Description: Addressable is a replacement for the URI implementation that is part of
+ Ruby's standard library. It more closely conforms to the relevant RFCs and
+ adds support for IRIs and URI templates.
+Standards-Version: 3.9.1
+Homepage: http://addressable.rubyforge.org/
+
