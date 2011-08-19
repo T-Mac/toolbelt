@@ -17,6 +17,14 @@ class Toolbelt < Sinatra::Base
     redirect "http://assets.heroku.com/heroku-client/heroku-setup.exe"
   end
 
+  get "/download/osx" do
+    haml :osx
+  end
+
+  get "/download/linux" do
+    haml :linux
+  end
+
 end
 
 use Rack::Static, :urls => %w( /ubuntu ), :root => "public"
