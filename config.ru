@@ -36,5 +36,5 @@ class Toolbelt < Sinatra::Base
 
 end
 
-use Rack::Static, :urls => %w( / ), :root => "public"
+use Rack::Static, :urls => %w( /apt ), :root => "public"
 run Toolbelt
