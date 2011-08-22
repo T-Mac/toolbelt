@@ -25,7 +25,11 @@ class Toolbelt < Sinatra::Base
     haml :linux
   end
 
+  get "/ubuntu/*" do
+    redirect "http://heroku-toolbelt.s3.amazonaws.com/apt/#{params[:splat].join("/")}"
+  end
+
 end
 
-use Rack::Static, :urls => %w( /ubuntu ), :root => "public"
+#use Rack::Static, :urls => %w( /ubuntu ), :root => "public"
 run Toolbelt
