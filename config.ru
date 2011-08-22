@@ -28,7 +28,7 @@ class Toolbelt < Sinatra::Base
   end
 
   get "/ubuntu/*" do
-    dir = (params[:splat] || []).reject { |p| p == "." }.join("/")
+    dir = params[:splat].first.gsub(/^\.\//, "")
     puts "splat: #{params[:splat]}"
     puts "redirect to #{dir}"
     redirect "http://heroku-toolbelt.s3.amazonaws.com/apt/#{dir}"
