@@ -15,16 +15,42 @@ class Toolbelt < Sinatra::Base
     sass :toolbelt
   end
 
-  get "/download/windows" do
+  get "/windows/download" do
+    redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt-beta.exe"
+  end
+
+  get "/windows/readme" do
     haml :windows
   end
 
-  get "/download/osx" do
+  get "/osx/download" do
+    redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt-beta.pkg"
+  end
+
+  get "/osx/readme" do
     haml :osx
   end
 
-  get "/download/linux" do
+  get "/linux/download" do
     haml :linux
+  end
+
+  get "/download/windows" do
+    %{
+      <a href="/windows/download">Download</a>
+      (<a href="/windows/readme">more info</a>)
+    }
+  end
+
+  get "/download/osx" do
+    %{
+      <a href="/osx/download">Download</a>
+      (<a href="/osx/readme">more info</a>)
+    }
+  end
+
+  get "/download/linux" do
+    redirect "/linux/download"
   end
 
   get "/ubuntu/*" do
