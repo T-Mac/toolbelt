@@ -16,11 +16,11 @@ class Toolbelt < Sinatra::Base
   end
 
   get "/download/windows" do
-    redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt.exe"
+    haml :windows
   end
 
   get "/download/osx" do
-    redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt.pkg"
+    haml :osx
   end
 
   get "/download/linux" do
