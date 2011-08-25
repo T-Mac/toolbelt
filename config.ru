@@ -15,42 +15,28 @@ class Toolbelt < Sinatra::Base
     sass :toolbelt
   end
 
-  get "/windows/download" do
-    redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt-beta.exe"
-  end
-
   get "/windows/readme" do
     haml :windows
   end
 
-  get "/osx/download" do
-    redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt-beta.pkg"
+  get "/windows/download" do
+    redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt-beta.exe"
   end
 
   get "/osx/readme" do
     haml :osx
   end
 
-  get "/linux/download" do
+  get "/osx/download" do
+    redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt-beta.pkg"
+  end
+
+  get "/linux/readme" do
     haml :linux
   end
 
-  get "/download/windows" do
-    %{
-      <a href="/windows/download">Download</a>
-      (<a href="/windows/readme">more info</a>)
-    }
-  end
-
-  get "/download/osx" do
-    %{
-      <a href="/osx/download">Download</a>
-      (<a href="/osx/readme">more info</a>)
-    }
-  end
-
-  get "/download/linux" do
-    redirect "/linux/download"
+  get "/linux/download" do
+    redirect "/linux/readme"
   end
 
   get "/ubuntu/*" do
@@ -60,6 +46,9 @@ class Toolbelt < Sinatra::Base
     redirect "http://heroku-toolbelt.s3.amazonaws.com/apt/#{dir}"
   end
 
+  ### Redirects for private beta list subscribers
+  get("/download/osx")       { redirect "/osx/readme" }
+  get("/download/windows")   { redirect "/windows/readme" }
 end
 
 use Rack::Static, :urls => %w( /apt ), :root => "public"
