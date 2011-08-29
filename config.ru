@@ -20,7 +20,7 @@ class Toolbelt < Sinatra::Base
   end
 
   get "/windows/download" do
-    redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt-beta.exe"
+    redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt.exe"
   end
 
   get "/osx/readme" do
@@ -28,7 +28,7 @@ class Toolbelt < Sinatra::Base
   end
 
   get "/osx/download" do
-    redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt-beta.pkg"
+    redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt.pkg"
   end
 
   get "/linux/readme" do
