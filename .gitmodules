@@ -1,0 +1,6 @@
+[submodule "heroku"]
+	path = heroku
+	url = git://github.com/heroku/heroku.git
+[submodule "foreman"]
+	path = foreman
+	url = git://github.com/ddollar/foreman.git
