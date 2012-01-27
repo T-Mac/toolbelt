@@ -2,15 +2,14 @@ debs = ["heroku", "foreman"]
 
 def sub_bundle(submodule, cmd)
   Bundler.with_clean_env do
-    system "cd #{submodule}; bundle #{cmd}" or abort
+    # TODO: talked with indirect; next bundler rc will make this unset unneeded
+    system "cd #{submodule}; unset GEM_HOME RUBYOPT; bundle #{cmd}" or abort
   end
 end
 
 def build_deb(name)
   unless File.exist? name + "/vendor/bundle"
-    # AFAICT this is broken due to a bug in Bundler
-    # sub_bundle name, "install --path vendor/bundle"
-    abort "Need to manually run bundle install in #{name} due to bundler bug"
+    sub_bundle name, "install --path vendor/bundle"
   end
 
   sub_bundle name, "exec rake deb:clean deb:build"
