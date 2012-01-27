@@ -1,12 +1,20 @@
 debs = ["heroku", "foreman"]
 
+def sub_bundle(submodule, cmd)
+  Bundler.with_clean_env do
+    system "cd #{submodule}; bundle #{cmd}" or abort
+  end
+end
+
 def build_deb(name)
-  path = "#{File.dirname(__FILE__)}/../#{name}"
-  raise "Dependency not checked out: #{path}" if !File.exists? path
-  # TODO: got to be a cleaner way to do this
-  bundle_unset = "GEM_PATH GEM_HOME BUNDLE_BIN_BATH BUNDLE_GEMFILE"
-  system "cd #{path}; unset #{bundle_unset}; bundle exec rake deb:clean deb:build" or abort
-  Dir.glob("#{path}/pkg/apt*/*deb").first
+  unless File.exist? name + "/vendor/bundle"
+    # AFAICT this is broken due to a bug in Bundler
+    # sub_bundle name, "install --path vendor/bundle"
+    abort "Need to manually run bundle install in #{name} due to bundler bug"
+  end
+
+  sub_bundle name, "exec rake deb:clean deb:build"
+  Dir.glob("#{name}/pkg/apt*/*deb").first
 end
 
 def s3_connect
@@ -52,11 +60,12 @@ task "deb:repository" do
   File.rename Dir.glob("freight/dists/debian-*").first, "freight/dists/debian"
 end
 
-# echo "deb http://packages.rcrowley.org $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/rcrowley.list
-# sudo wget -O /etc/apt/trusted.gpg.d/rcrowley.gpg http://packages.rcrowley.org/keyring.gpg
-# sudo apt-get update && sudo apt-get -y install freight
 desc "Publish apt-get repository to S3."
 task "deb:release" => "deb:repository" do |t|
+  if ! system "which freight > /dev/null"
+    abort "Need freight installed: https://github.com/rcrowley/freight#readme"
+  end
+
   Find.find("freight").each do |file|
     unless File.directory?(file)
       store file, "apt/#{file.sub(/freight\//, '')}"
