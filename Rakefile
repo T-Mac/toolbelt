@@ -8,9 +8,7 @@ def sub_bundle(submodule, cmd)
 end
 
 def build_deb(name)
-  unless File.exist? name + "/vendor/bundle"
-    sub_bundle name, "install --path vendor/bundle"
-  end
+  sub_bundle name, "install --path vendor/bundle"
 
   sub_bundle name, "exec rake deb:clean deb:build"
   Dir.glob("#{name}/pkg/apt*/*deb").first
