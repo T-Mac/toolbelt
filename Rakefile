@@ -33,6 +33,7 @@ end
 
 def store(package_file, filename, bucket=ENV["HEROKU_RELEASE_BUCKET"])
   s3_connect
+  abort("Please set HEROKU_RELEASE_BUCKET") unless bucket
   puts "storing: #{filename} in #{bucket}"
   AWS::S3::S3Object.store(filename, File.open(package_file), bucket,
                           :access => :public_read)
@@ -40,32 +41,33 @@ end
 
 desc "Clear out apt-get repository files"
 task "deb:clean" do
-  FileUtils.rm_rf "freight-lib"
-  FileUtils.rm_rf "freight"
+  FileUtils.rm_rf "apt"
 end
 
 desc "Build an apt-get repository with freight"
 task "deb:repository" do
-  debs.each do |dep|
-    deb_path = build_deb dep
-    system "echo $PWD"
-    system "freight add -c $PWD/freight.conf #{deb_path} apt/debian"
+  FileUtils.mkdir_p "apt"
+
+  paths = debs.map {|dep| File.expand_path build_deb(dep) }
+
+  Dir.chdir("apt") do
+    paths.each do |path|
+      FileUtils.cp(path, File.basename(path))
+    end
+
+    touch "Sources"
+    sh "apt-ftparchive packages . > Packages"
+    sh "gzip -c Packages > Packages.gz"
+    sh "apt-ftparchive release . > Release"
+    sh "gpg -abs -u 0F1B0520 -o Release.gpg Release"
   end
-  system "freight cache -c $PWD/freight.conf"
-  # Symlinks don't translate to S3
-  File.delete "freight/dists/debian"
-  File.rename Dir.glob("freight/dists/debian-*").first, "freight/dists/debian"
 end
 
 desc "Publish apt-get repository to S3."
 task "deb:release" => "deb:repository" do |t|
-  if ! system "which freight > /dev/null"
-    abort "Need freight installed: https://github.com/rcrowley/freight#readme"
-  end
-
-  Find.find("freight").each do |file|
+  Find.find("apt").each do |file|
     unless File.directory?(file)
-      store file, "apt/#{file.sub(/freight\//, '')}"
+      store file, file
     end
   end
 end
