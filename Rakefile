@@ -31,7 +31,7 @@ def s3_connect
   @s3_connected = true
 end
 
-def store(package_file, filename, bucket=ENV["HEROKU_RELEASE_BUCKET"])
+def store(package_file, filename, bucket)
   s3_connect
   abort("Please set HEROKU_RELEASE_BUCKET") unless bucket
   puts "storing: #{filename} in #{bucket}"
@@ -67,7 +67,7 @@ desc "Publish apt-get repository to S3."
 task "deb:release" => "deb:repository" do |t|
   Find.find("apt").each do |file|
     unless File.directory?(file)
-      store file, file
+      store file, file, ENV["HEROKU_RELEASE_BUCKET"] || "heroku-toolbelt"
     end
   end
 end
