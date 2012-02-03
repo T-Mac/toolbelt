@@ -1,7 +1,26 @@
+require "tmpdir"
+
+def basedir
+  File.expand_path("../../", __FILE__)
+end
+
+def beta?
+  version =~ /pre/
+end
+
+def resource(name)
+  File.expand_path("../../dist/resources/#{name}", __FILE__)
+end
+
+def pkg(filename)
+  FileUtils.mkdir_p("#{basedir}/pkg")
+  "#{basedir}/pkg/#{filename}"
+end
+
 def sub_bundle(submodule, cmd)
   Bundler.with_clean_env do
     # TODO: talked with indirect; next bundler rc will make this unset unneeded
-    system "cd components/#{submodule}; unset GEM_HOME RUBYOPT; bundle #{cmd}" or abort
+    system "cd #{basedir}/components/#{submodule}; unset GEM_HOME RUBYOPT; bundle #{cmd}" or abort
   end
 end
 
@@ -22,12 +41,23 @@ def s3_connect
   @s3_connected = true
 end
 
-def store(package_file, filename, bucket)
+def store(package_file, filename, bucket="assets.heroku.com")
   s3_connect
-  abort("Please set HEROKU_RELEASE_BUCKET") unless bucket
   puts "storing: #{filename} in #{bucket}"
   AWS::S3::S3Object.store(filename, File.open(package_file), bucket,
                           :access => :public_read)
+end
+
+def tempdir
+  Dir.mktmpdir do |dir|
+    Dir.chdir(dir) do
+      yield(dir)
+    end
+  end
+end
+
+def version
+  @version ||= %x{ ruby -r#{basedir}/components/heroku/lib/heroku/version.rb -e "puts Heroku::VERSION" }.chomp
 end
 
 Dir[File.expand_path("../../dist/**/*.rake", __FILE__)].each do |rake|
