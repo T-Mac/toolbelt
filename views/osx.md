@@ -8,7 +8,7 @@ The Heroku Toolbelt for OSX will give you everything you need to get started usi
 
 * A standalone version of the [heroku command line client](http://github.com/heroku/heroku)
 * [Foreman](http://github.com/ddollar/foreman) for running your apps locally
-* [git-osx-installer for Snow Leopard and below](http://code.google.com/p/git-osx-installer)
+* [Git](http://code.google.com/p/git-osx-installer) for revision control and pushing to Heroku
 
 ### Getting started
 
