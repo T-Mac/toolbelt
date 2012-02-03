@@ -3,7 +3,7 @@ debs = ["heroku", "foreman"]
 def build_deb(name)
   sub_bundle name, "install --path vendor/bundle"
   sub_bundle name, "exec rake deb:clean deb:build"
-  Dir.glob("#{name}/pkg/apt*/*deb").first
+  Dir.glob("#{basedir}/components/#{name}/pkg/apt*/*deb").first
 end
 
 desc "Clear out apt-get repository files"
