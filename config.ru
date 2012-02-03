@@ -1,11 +1,16 @@
 $stdout.sync = true
 
-require "rubygems"
 require "bundler/setup"
+require "compass"
+require "rdiscount"
+require "heroku/nav"
+require "sinatra"
 
-Bundler.require(:default, ENV["RACK_ENV"])
+ENV["HEROKU_NAV_URL"] = "https://nav.heroku.com/v2"
 
 class Toolbelt < Sinatra::Base
+
+  use Heroku::Nav::Header
 
   configure do
     Compass.configuration do |config|
