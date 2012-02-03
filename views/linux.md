@@ -4,7 +4,7 @@
 
 The Heroku Toolbelt for Debian/Ubuntu will give you everything you need to get started using Heroku. The installer contains:
 
-* A standalone version of the [heroku command lineclient](http://github.com/heroku/heroku)
+* A standalone version of the [heroku client](http://github.com/heroku/heroku)
 * [Foreman](http://github.com/ddollar/foreman) for running your apps locally
 * [Git](http://git-scm.com/) for revision control and pushing to Heroku
 
