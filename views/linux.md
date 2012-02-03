@@ -46,4 +46,4 @@ To keep your heroku client updated, simply run `heroku update`
 
 ### Technical details
 
-The `heroku` client will be installed into Program Files, and will contain a bundled Ruby VM for its own execution.
+The `heroku` command line client will be installed into `/usr/local/heroku` and the executable will be symlinked as `/usr/bin/heroku`.
