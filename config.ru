@@ -61,5 +61,5 @@ class Toolbelt < Sinatra::Base
   get("/download/windows")   { redirect "/windows/readme" }
 end
 
-use Rack::Static, :urls => %w( /apt ), :root => "public"
+use Rack::Static, :urls => %w( /apt, /images ), :root => "public"
 run Toolbelt
