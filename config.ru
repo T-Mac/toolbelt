@@ -17,6 +17,16 @@ class Toolbelt < Sinatra::Base
     set :sass, Compass.sass_engine_options
   end
 
+  helpers do
+    def markdown_plus(partial)
+      content = markdown(partial)
+
+      content.gsub(/<code>(.*?)<\/code>/m) do |match|
+        match.gsub(/\$(.*)\n/, "<span class=\"highlight\">$\\1</span>\n")
+      end
+    end
+  end
+
   get "/" do
     haml :index
   end
