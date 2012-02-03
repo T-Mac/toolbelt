@@ -1,0 +1,6 @@
+[submodule "components/heroku"]
+	path = components/heroku
+	url = https://github.com/heroku/heroku.git
+[submodule "components/foreman"]
+	path = components/foreman
+	url = https://github.com/ddollar/foreman.git
