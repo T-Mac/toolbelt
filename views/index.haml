@@ -1,16 +1,34 @@
-%h1 Heroku Toolbelt
+// #heroku-header
+// Import the Heroku Header
 
-%ul#platforms
-  %li
-    %b Mac OS X:
-    %a{ :href => "/osx/readme" } readme
-    |
-    %a{ :href => "/osx/download" } download
-  %li
-    %b Windows:
-    %a{ :href => "/windows/readme" } readme
-    |
-    %a{ :href => "/windows/download" } download
-  %li
-    %b Debian/Ubuntu:
-    %a{ :href => "/linux/readme" } readme
+%header
+  %h1
+    Heroku Toolbelt
+
+  %h2
+    The Heroku Toolbelt will give you everything you need
+    %br
+    to get started using Heroku
+
+.div
+  %nav
+    %ul#platform.tabNavigation
+      %li.mac
+        %a{ :href => "#mac" } Mac OS X
+
+      %li.windows
+        %a{ :href => "#windows" } Windows
+
+      %li.ubuntu
+        %a{ :href => "#linux" } Debian/Ubuntu
+
+  #instructions
+    #mac.tab-content.defaulttab
+      = markdown :osx
+
+    #windows.tab-content
+      = markdown :windows
+
+    #linux.tab-content
+      = markdown :linux
+

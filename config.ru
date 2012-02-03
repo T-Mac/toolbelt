@@ -7,6 +7,16 @@ Bundler.require(:default, ENV["RACK_ENV"])
 
 class Toolbelt < Sinatra::Base
 
+  configure do
+    Compass.configuration do |config|
+      config.project_path = File.dirname(__FILE__)
+      config.sass_dir = 'views'
+    end
+
+    set :haml, { :format => :html5 }
+    set :sass, Compass.sass_engine_options
+  end
+
   get "/" do
     haml :index
   end
@@ -51,5 +61,5 @@ class Toolbelt < Sinatra::Base
   get("/download/windows")   { redirect "/windows/readme" }
 end
 
-use Rack::Static, :urls => %w( /apt ), :root => "public"
+use Rack::Static, :urls => %w( /apt, /images ), :root => "public"
 run Toolbelt

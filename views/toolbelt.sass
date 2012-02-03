@@ -1,0 +1,143 @@
+@import "compass/reset"
+@import "compass/css3"
+
+body
+  background: #1b1b24
+  color: #8487AF
+  font:
+    family: "helvetica neue", helvetica, arial, geneva, sans-serif
+    size: 14px
+
+#heroku-header
+  background: grey
+  height: 100px
+
+header
+  font-family: "CorbelRegular", "helvetica neue", helvetica, arial, geneva, sans-serif
+  -webkit-font-smoothing: antialiased
+  font-weight: normal
+  padding: 50px 0
+  text-align: center
+  text-shadow: 0 1px 1px #000
+  text-transform: lowercase
+
+  h1
+    color: #fff
+    font-size: 36px
+    margin-bottom: 18px
+
+  h2
+    color: #a292ff
+    font-size: 25px
+    line-height: 30px
+
+nav
+  text-align: center
+
+  li
+    display: inline-block
+    margin-right: 50px
+
+    a
+      background-repeat: no-repeat
+      color: #9587EB
+      display: block
+      font:
+        family: "CorbelRegular", "helvetica neue", helvetica, arial, geneva, sans-serif
+        size: 20px
+      padding-top: 151px
+      text-decoration: none
+      text-shadow: 0 0 1px #000
+      width: 132px
+
+      &:hover
+        color: rgb(166, 166, 255)
+        text-shadow: 0 0 6px rgba(120, 120, 255, .4)
+
+      &.selected
+        color: rgb(143, 191, 255)
+        text-shadow: 0 0 6px rgba(56,187,253,.7)
+
+    &:last-child
+      margin-right: 0
+
+    &.mac a
+      background-image: url(/images/mac_logo.png)
+
+    &.windows a
+      background-image: url(/images/windows_logo.png)
+
+    &.ubuntu a
+      background-image: url(/images/ubuntu_logo.png)
+
+#instructions
+  margin: 0 auto
+  padding: 50px 0
+  width: 600px
+
+  .hide
+    display: none
+
+  a:link,
+  a:visited
+    color: #9782FF
+    text-decoration: none
+
+  h3
+    color: #D4D4FF
+    font:
+      family: "CorbelRegular", "helvetica neue", helvetica, arial, geneva, sans-serif
+      size: 20px
+    margin-bottom: 24px
+
+  p
+    line-height: 18px
+    margin-bottom: 24px
+
+    &.button
+      text-align: center
+
+    &.button a:link,
+    &.button a:visited
+      background: #7B5AE0
+      @include background-image(linear-gradient(top, #9372F7,#6443C9))
+      border: transparent
+      border-radius: 41px
+      box-shadow: 0 1px 3px rgba(0,0,0,0.5),0 1px 2px rgba(255,255,255,0.25) inset
+      color: #100F14
+      display: inline-block
+      font-family: "helvetica neue", helvetica
+      font-size: 14px
+      -webkit-font-smoothing: antialiased
+      font-weight: bold
+      min-width: 80px
+      padding: 9px 24px
+      text-align: center
+      text-decoration: none
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25)
+
+  ul
+    list-style: disc
+    margin-bottom: 24px
+    padding-left: 16px
+
+    li
+      line-height: 18px
+
+  code
+    font:
+      family: monaco, monospace
+      size: 12px
+
+  pre
+    background: #111116
+    @include border-radius(3px)
+    @include box-shadow(0 1px 0 rgba(255, 255, 255, .02), 0 1px 2px rgba(0, 0, 0, .25) inset)
+    line-height: 20px
+    margin-bottom: 24px
+    overflow-x: scroll
+    padding: 12px
+
+    .highlight
+      color: #9588FC
+
