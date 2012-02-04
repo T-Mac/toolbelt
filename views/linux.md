@@ -10,14 +10,6 @@ The Heroku Toolbelt for Debian/Ubuntu will give you everything you need to get s
 * [Foreman](http://github.com/ddollar/foreman) for running your apps locally
 * [Git](http://git-scm.com/) for revision control and pushing to Heroku
 
-### Installation
-
-    $ sudo -s  # become root
-    $ echo "deb http://toolbelt.herokuapp.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
-    $ wget -q -O - http://toolbelt.herokuapp.com/apt/release.key | apt-key add -
-    $ apt-get update
-    $ apt-get install heroku-toolbelt
-
 ### Getting started
 
 Once installed, you'll have access to the heroku command from your command shell. Log in using the email address and password you used when creating your Heroku account:
