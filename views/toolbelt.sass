@@ -35,16 +35,22 @@ nav
     margin-right: 50px
 
     a
-      background-repeat: no-repeat
-      color: #9587EB
+      color: #5c5f80
       display: block
       font:
         family: "CorbelRegular", "helvetica neue", helvetica, arial, geneva, sans-serif
         size: 20px
-      padding-top: 151px
       text-decoration: none
       text-shadow: 0 0 1px #000
-      width: 132px
+      width: 150px
+
+      span
+        display: block
+
+      .icon
+        background-image: url(/images/os_logos.png)
+        height: 148px
+        margin-bottom: 15px
 
       &:hover
         color: rgb(166, 166, 255)
@@ -57,14 +63,29 @@ nav
     &:last-child
       margin-right: 0
 
-    &.mac a
-      background-image: url(/images/mac_logo.png)
+    &.osx a:hover .icon
+      background-position: 0 -148px
 
-    &.windows a
-      background-image: url(/images/windows_logo.png)
+    &.osx a.selected .icon
+      background-position: 0 -296px
 
-    &.ubuntu a
-      background-image: url(/images/ubuntu_logo.png)
+    &.windows .icon
+      background-position: -150px 0
+
+    &.windows a:hover .icon
+      background-position: -150px -148px
+
+    &.windows a.selected .icon
+      background-position: -150px -296px
+
+    &.ubuntu .icon
+      background-position: -300px 0
+
+    &.ubuntu a:hover .icon
+      background-position: -300px -148px
+
+    &.ubuntu a.selected .icon
+      background-position: -300px -296px
 
 #instructions
   margin: 0 auto
@@ -136,4 +157,3 @@ nav
 
     .highlight
       color: #9588FC
-

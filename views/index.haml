@@ -10,17 +10,29 @@
 .div
   %nav
     %ul#platform.tabNavigation
-      %li.mac
-        %a{ :href => "#mac" } Mac OS X
+      %li.osx
+        %a{ :href => "#osx" }
+          %span.icon
+
+          %span
+            Mac OS X
 
       %li.windows
-        %a{ :href => "#windows" } Windows
+        %a{ :href => "#windows" }
+          %span.icon
+
+          %span
+            Windows
 
       %li.ubuntu
-        %a{ :href => "#linux" } Debian/Ubuntu
+        %a{ :href => "#linux" }
+          %span.icon
+
+          %span
+            Debian/Ubuntu
 
   #instructions
-    #mac.tab-content.defaulttab
+    #osx.tab-content.defaulttab
       ~ markdown_plus :osx
 
     #windows.tab-content
