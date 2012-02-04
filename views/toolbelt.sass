@@ -6,7 +6,7 @@ body
   color: #8487AF
   font:
     family: "helvetica neue", helvetica, arial, geneva, sans-serif
-    size: 14px
+    size: 100%
 
 .wrapper
   max-width: 600px
@@ -24,13 +24,13 @@ header
 
   h1
     color: #fff
-    font-size: 36px
-    margin-bottom: 18px
+    font-size: 2.1875em
+    margin-bottom: 0.514285714em
 
   h2
     color: #a292ff
-    font-size: 25px
-    line-height: 30px
+    font-size: 1.5625em
+    line-height: 1.2em
 
 nav
   text-align: center
@@ -44,7 +44,7 @@ nav
       display: block
       font:
         family: "CorbelRegular", "helvetica neue", helvetica, arial, geneva, sans-serif
-        size: 20px
+        size: 1.25em
       text-decoration: none
       text-shadow: 0 0 1px #000
       width: 150px
@@ -55,7 +55,7 @@ nav
       .icon
         background-image: url(/images/os_logos.png)
         height: 148px
-        margin-bottom: 15px
+        margin-bottom: .75em
 
       &:hover
         color: rgb(166, 166, 255)
@@ -108,18 +108,19 @@ nav
     color: #D4D4FF
     font:
       family: "CorbelRegular", "helvetica neue", helvetica, arial, geneva, sans-serif
-      size: 20px
-    margin-bottom: 24px
+      size: 1.25em
+    margin-bottom: 1.2em
 
   p
-    line-height: 18px
-    margin-bottom: 24px
+    font-size: .875em
+    line-height: 1.28571429em
+    margin-bottom: 1.71428571em
 
     &:last-child
       margin-bottom: 0
 
     &.button
-      margin-bottom: 40px
+      margin-bottom: 2.85714286em
       text-align: center
 
     &.button *
@@ -137,7 +138,7 @@ nav
       @include box-shadow(0 1px 3px rgba(0,0,0,0.5),0 1px 2px rgba(255,255,255,0.25) inset)
       color: #100F14
       font-family: "helvetica neue", helvetica
-      font-size: 14px
+      // font-size: 14px
       -webkit-font-smoothing: antialiased
       font-weight: bold
       min-width: 80px
@@ -149,7 +150,7 @@ nav
       @include box-shadow(0 1px 0 rgba(255, 255, 255, .02), 0 1px 2px rgba(0, 0, 0, .25) inset)
       color: #8487AF
       font-family: "MesloRegular", monaco, monospace
-      font-size: 13px
+      font-size: .8125em
       min-width: 275px
       padding: 9px 24px
 
@@ -162,19 +163,20 @@ nav
       margin-bottom: 0
 
     li
-      line-height: 18px
+      font-size: .875em
+      line-height: 1.28571429em
 
   code
     font:
       family: "MesloRegular", monaco, monospace
-      size: 13px
+      size: .8125em
 
   pre
     background: #111116
     @include border-radius(3px)
     @include box-shadow(0 1px 0 rgba(255, 255, 255, .02), 0 1px 2px rgba(0, 0, 0, .25) inset)
-    line-height: 20px
-    margin-bottom: 24px
+    line-height: 1.25em
+    margin-bottom: 1.71428571em
     overflow-x: scroll
     padding: 12px
 
