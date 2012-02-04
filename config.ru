@@ -69,6 +69,12 @@ class Toolbelt < Sinatra::Base
     redirect "http://heroku-toolbelt.s3.amazonaws.com/apt/#{dir}"
   end
 
+  get "/install.sh" do
+    content_type "text/plain"
+    erb :install
+  end
+
+
   ### Redirects for private beta list subscribers
   get("/download/osx")       { redirect "/osx/readme" }
   get("/download/windows")   { redirect "/windows/readme" }
