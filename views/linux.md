@@ -1,4 +1,6 @@
-### Heroku Toolbelt for Debian/Ubuntu
+<p class="button">
+    <input type="text" value="$ curl http://cl.ly/heroku | bash" readonly>
+</p>
 
 ### What is it?
 
