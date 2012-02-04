@@ -1,12 +1,12 @@
 $stdout.sync = true
 
+ENV["HEROKU_NAV_URL"] = "https://nav.heroku.com/v2"
+
 require "bundler/setup"
 require "compass"
 require "rdiscount"
 require "heroku/nav"
 require "sinatra"
-
-ENV["HEROKU_NAV_URL"] = "https://nav.heroku.com/v2"
 
 class Toolbelt < Sinatra::Base
 
