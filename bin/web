@@ -1,0 +1,9 @@
+#!/bin/bash
+
+PORT=${PORT:-5000}
+RACK_ENV=${RACK_ENV:-development}
+ROOT=$(dirname $(dirname $0))
+
+export RUBYOPT="-I$ROOT/lib -rstdout"
+
+exec bundle exec thin start -p $PORT

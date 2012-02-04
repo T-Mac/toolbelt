@@ -1,1 +1,1 @@
-web: bundle exec buckshot
+web: bin/web
