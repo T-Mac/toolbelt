@@ -149,9 +149,10 @@ nav
       @include box-shadow(0 1px 0 rgba(255, 255, 255, .02), 0 1px 2px rgba(0, 0, 0, .25) inset)
       color: #8487AF
       font-family: "MesloRegular", monaco, monospace
-      font-size: 1em
-      min-width: 19.6428571em
+      font-size: .928571429em
+      min-width: 18.4615385em
       padding: .642857143em 1.71428571em
+      text-align: center
 
   ul
     list-style: disc
@@ -227,8 +228,14 @@ nav
   #instructions
     padding: 30px 0
 
+@media screen and (max-width: 320px)
+  #instructions
+    p.button input
+      font-size: .785714286em
+      min-width: 21.8181818em
+
 @media only screen and (-webkit-min-device-pixel-ratio: 2)
-  p.button a
-    // The !important flag shouldn't be necessary but somehow it is
-    @include background-image(image-url("/images/download_glyph_2x.png"), linear-gradient(top, #9372F7,#6443C9) !important)
-    background-size: 11px 15px, 100%
+  #instructions
+    p.button a
+      @include background-image(image-url("/images/download_glyph_2x.png"), linear-gradient(top, #9372F7,#6443C9))
+      background-size: 11px 15px, 100%
