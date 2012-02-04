@@ -1,12 +1,12 @@
 $stdout.sync = true
 
+ENV["HEROKU_NAV_URL"] = "https://nav.heroku.com/v2"
+
 require "bundler/setup"
 require "compass"
 require "rdiscount"
 require "heroku/nav"
 require "sinatra"
-
-ENV["HEROKU_NAV_URL"] = "https://nav.heroku.com/v2"
 
 class Toolbelt < Sinatra::Base
 
@@ -68,6 +68,12 @@ class Toolbelt < Sinatra::Base
     dir = params[:splat].first.gsub(/^\.\//, "")
     redirect "http://heroku-toolbelt.s3.amazonaws.com/apt/#{dir}"
   end
+
+  get "/install.sh" do
+    content_type "text/plain"
+    erb :install
+  end
+
 
   ### Redirects for private beta list subscribers
   get("/download/osx")       { redirect "/osx/readme" }
