@@ -36,8 +36,8 @@ class Toolbelt < Sinatra::Base
     haml :index
   end
 
-  get "/toolbelt.css" do
-    sass :toolbelt
+  get "/:name.css" do
+    sass params[:name].to_sym
   end
 
   get "/windows/readme" do
@@ -73,7 +73,6 @@ class Toolbelt < Sinatra::Base
     content_type "text/plain"
     erb :install
   end
-
 
   ### Redirects for private beta list subscribers
   get("/download/osx")       { redirect "/osx/readme" }
