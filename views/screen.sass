@@ -53,7 +53,7 @@ nav
         display: block
 
       .icon
-        background-image: url(/images/os_logos.png)
+        background-image: url("/images/os_logos.png")
         height: 148px
         margin-bottom: .75em
 
@@ -237,8 +237,12 @@ nav
       @include background-image(image-url("/images/download_glyph_2x.png"), linear-gradient(top, #9372F7,#6443C9))
       background-size: 11px 15px, 100%
 
-.no-multiplebgs
-  // Don't add extra padding if we can't show the download glyph
+.no-multiplebgs, .no-cssgradients
+  // Only show download glyph if:
+  //
+  // * We can't show multiple background images (IE7 & IE8)
+  // * We can't render CSS gradients (IE9)
   #instructions p.button a:link,
   #instructions p.button a:visited
-    padding-left: 1.71428571em
+    background-image: url("/images/download_glyph.png")
+    background-position: 1.71428571em center
