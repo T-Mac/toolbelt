@@ -127,7 +127,6 @@ nav
       border: none
       @include border-radius(41px)
       display: inline-block
-      padding: .642857143em 1.71428571em .642857143em 3em
 
     &.button a:link,
     &.button a:visited
@@ -141,6 +140,7 @@ nav
       -webkit-font-smoothing: antialiased
       font-weight: bold
       min-width: 5.71428571em
+      padding: .642857143em 1.71428571em .642857143em 3em
       text-decoration: none
       text-shadow: 0 1px 0 rgba(255, 255, 255, 0.15)
 
@@ -236,3 +236,9 @@ nav
     p.button a
       @include background-image(image-url("/images/download_glyph_2x.png"), linear-gradient(top, #9372F7,#6443C9))
       background-size: 11px 15px, 100%
+
+.no-multiplebgs
+  // Don't add extra padding if we can't show the download glyph
+  #instructions p.button a:link,
+  #instructions p.button a:visited
+    padding-left: 1.71428571em
