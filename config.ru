@@ -23,8 +23,8 @@ class Toolbelt < Sinatra::Base
   end
 
   helpers do
-    def markdown_plus(partial)
-      content = markdown(partial)
+    def markdown_plus(partial, opts={})
+      content = markdown(partial, opts)
 
       content.gsub(/<code>(.*?)<\/code>/m) do |match|
         match.gsub(/\$(.*)\n/, "<span class=\"highlight\">$\\1</span>\n")
@@ -33,51 +33,35 @@ class Toolbelt < Sinatra::Base
   end
 
   get "/" do
-    haml :index
+    haml :index, :locals => { :platform => :osx }
+  end
+
+  %w( osx windows linux ).each do |platform|
+    get "/#{platform}" do
+      if request.xhr?
+        markdown_plus platform.to_sym
+      else
+        haml :index, :locals => { :platform => platform.to_sym }
+      end
+    end
   end
 
   get "/:name.css" do
-    sass params[:name].to_sym
+    sass params[:name].to_sym rescue not_found
   end
 
-  get "/windows/readme" do
-    haml :windows
-  end
-
-  get "/windows/download" do
-    redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt.exe"
-  end
-
-  get "/osx/readme" do
-    haml :osx
-  end
-
-  get "/osx/download" do
-    redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt.pkg"
-  end
-
-  get "/linux/readme" do
-    haml :linux
-  end
-
-  get "/linux/download" do
-    redirect "/linux/readme"
-  end
-
+  # apt repository
   get "/ubuntu/*" do
     dir = params[:splat].first.gsub(/^\.\//, "")
     redirect "http://heroku-toolbelt.s3.amazonaws.com/apt/#{dir}"
   end
 
+  # linux install instructions
   get "/install.sh" do
     content_type "text/plain"
     erb :install
   end
-
-  ### Redirects for private beta list subscribers
-  get("/download/osx")       { redirect "/osx/readme" }
-  get("/download/windows")   { redirect "/windows/readme" }
 end
 
-use Rack::Static, :urls => %w( /apt, /images ), :root => "public"
+use Rack::Static, :urls => %w( /apt /images /scripts ), :root => "public"
 run Toolbelt

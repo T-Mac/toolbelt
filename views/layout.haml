@@ -10,28 +10,21 @@
     %link{ :rel => "stylesheet", :href => "https://statics.herokuapp.com/fonts/fonts.css" }
     %link{ :rel => "stylesheet", :href => "/screen.css" }
 
-    %script{ :src => "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" }
+    %script{ :src => "/scripts/jquery.min.js" }
+    %script{ :src => "/scripts/jquery.pjax.js" }
+    %script{ :src => "http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.0.6-development-only.js" }
 
     /[if lte IE]
       %link{ :rel => "stylesheet", :href => "/ie7.css" }
 
     :javascript
-      $(function () {
-        var tabContainers = $('#instructions > div');
-        tabContainers.hide().filter(':first').show();
-
-        $('.tabNavigation a').click(function () {
-          tabContainers.hide();
-          tabContainers.filter(this.hash).show();
-
+      $(window).ready(function () {
+        $('.tabNavigation a').pjax('#instructions').live('click', function() {
           $('.tabNavigation a').removeClass('selected');
           $(this).addClass('selected');
-
-          return false;
-        }).filter(':first').click();
+        });;
+        $('.tabNavigation .#{platform} a').addClass('selected');
       });
-
-    %script{ :src => "http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.0.6-development-only.js" }
 
   %body
     .wrapper
