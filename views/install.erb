@@ -2,7 +2,7 @@
 echo "deb http://toolbelt.herokuapp.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
 
 # install heroku's release key for package verification
-curl -Lo- http://toolbelt.herokuapp.com/apt/release.key | apt-key add -
+curl -L http://toolbelt.herokuapp.com/apt/release.key | apt-key add -
 
 # update your sources
 apt-get update
