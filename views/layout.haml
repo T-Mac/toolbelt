@@ -12,7 +12,6 @@
 
     %script{ :src => "/scripts/jquery.min.js" }
     %script{ :src => "/scripts/jquery.pjax.js" }
-    %script{ :src => "http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.0.6-development-only.js" }
 
     /[if lte IE]
       %link{ :rel => "stylesheet", :href => "/ie7.css" }
@@ -36,6 +35,8 @@
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
+
+    %script{ :src => "http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.0.6-development-only.js" }
 
   %body
     .wrapper
