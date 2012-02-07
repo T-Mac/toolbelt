@@ -1,5 +1,5 @@
 <p class="download">
-    <code>$ curl -L <a href="http://cl.ly/h">http://cl.ly/h</a> | sudo bash</code>
+    <code>curl -L <a href="http://cl.ly/h">http://cl.ly/h</a> | sudo bash</code>
 </p>
 
 ### What is it?
