@@ -1,6 +1,9 @@
 @import "compass/reset"
 @import "compass/css3"
 
+$base_font_size: .875em
+$base_line_height: 1.28571429em
+
 body
   background: #1b1b24
   color: #8487AF
@@ -112,8 +115,8 @@ nav
     margin-bottom: 1.2em
 
   p
-    font-size: .875em
-    line-height: 1.28571429em
+    font-size: $base_font_size
+    line-height: $base_line_height
     margin-bottom: 1.71428571em
 
     &:last-child
@@ -163,19 +166,15 @@ nav
       margin-bottom: 0
 
     li
-      font-size: .875em
-      line-height: 1.28571429em
-
-  code
-    font:
-      family: "MesloRegular", monaco, monospace
-      size: .8125em
+      font-size: $base_font_size
+      line-height: $base_line_height
 
   pre
     background: #111116
     @include border-radius(3px)
     @include box-shadow(0 1px 0 rgba(255, 255, 255, .02), 0 1px 2px rgba(0, 0, 0, .25) inset)
-    line-height: 1.25em
+    font-size: $base_font_size
+    line-height: $base_line_height
     margin-bottom: 1.71428571em
     padding: 0.923076923em
     overflow: auto
@@ -185,6 +184,11 @@ nav
 
     .highlight
       color: #9588FC
+
+  code
+    font:
+      family: "MesloRegular", monaco, monospace
+      size: .928571429em
 
 @media screen and (max-width: 600px)
   nav
