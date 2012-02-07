@@ -1,5 +1,5 @@
-<p class="button">
-    <input type="text" value="$ curl -L http://cl.ly/h | sudo bash" readonly>
+<p class="download">
+    <code>$ curl -L <a href="http://cl.ly/h">http://cl.ly/h</a> | sudo bash</code>
 </p>
 
 ### What is it?

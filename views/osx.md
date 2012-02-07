@@ -1,5 +1,5 @@
-<p class="button">
-	<a href="/osx/download">Heroku Toolbelt for OSX</a>
+<p class="download">
+	<a href="/osx/download" class="button">Heroku Toolbelt for OSX</a>
 </p>
 
 ### What is it?

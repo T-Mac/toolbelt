@@ -99,13 +99,14 @@ nav
   margin: 0 auto
   padding: 50px 0
 
-  .hide
-    display: none
-
   a:link,
   a:visited
     color: #9782FF
     text-decoration: none
+
+  a:hover,
+  a:active
+    text-decoration: underline
 
   h3
     color: #D4D4FF
@@ -122,40 +123,39 @@ nav
     &:last-child
       margin-bottom: 0
 
-    &.button
+    &.download
       margin-bottom: 2.85714286em
       text-align: center
 
-    &.button *
-      border: none
-      @include border-radius(41px)
-      display: inline-block
+    &.download
+      *
+        @include border-radius(41px)
+        display: inline-block
 
-    &.button a:link,
-    &.button a:visited
-      background: #7B5AE0
-      background-position: 1.71428571em center, 0 0
-      background-repeat: no-repeat
-      @include background-image(image-url("/images/download_glyph.png"), linear-gradient(top, #9372F7,#6443C9))
-      @include box-shadow(0 1px 3px rgba(0,0,0,0.5),0 1px 2px rgba(255,255,255,0.25) inset)
-      color: #100F14
-      font-family: "helvetica neue", helvetica, arial, geneva, sans-serif
-      -webkit-font-smoothing: antialiased
-      font-weight: bold
-      min-width: 5.71428571em
-      padding: .642857143em 1.71428571em .642857143em 3em
-      text-decoration: none
-      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.15)
+      a:link.button,
+      a:visited.button
+        background: #7B5AE0
+        background-position: 1.71428571em center, 0 0
+        background-repeat: no-repeat
+        @include background-image(image-url("/images/download_glyph.png"), linear-gradient(top, #9372F7,#6443C9))
+        border: none
+        @include box-shadow(0 1px 3px rgba(0,0,0,0.5),0 1px 2px rgba(255,255,255,0.25) inset)
+        color: #100F14
+        font-family: "helvetica neue", helvetica, arial, geneva, sans-serif
+        -webkit-font-smoothing: antialiased
+        font-weight: bold
+        min-width: 5.71428571em
+        padding: .642857143em 1.71428571em .642857143em 3em
+        text-decoration: none
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.15)
 
-    &.button input
-      background: #111116
-      @include box-shadow(0 1px 0 rgba(255, 255, 255, .02), 0 1px 2px rgba(0, 0, 0, .25) inset)
-      color: #8487AF
-      font-family: "MesloRegular", monaco, monospace
-      font-size: .928571429em
-      width: 27.6923077em
-      padding: .642857143em 0
-      text-align: center
+      code
+        background: #111116
+        @include box-shadow(0 1px 0 rgba(255, 255, 255, .02), 0 1px 2px rgba(0, 0, 0, .25) inset)
+        color: #8487AF
+        padding: .642857143em 0
+        text-align: center
+        width: 27.6923077em
 
   ul
     list-style: disc
@@ -176,8 +176,8 @@ nav
     font-size: $base_font_size
     line-height: $base_line_height
     margin-bottom: 1.71428571em
-    padding: 0.923076923em
     overflow: auto
+    padding: 0.923076923em
 
     &:last-child
       margin-bottom: 0
@@ -232,7 +232,7 @@ nav
   #instructions
     padding: 30px 0
 
-    p.button input
+    p.download code
       width: 22.3076923em
 
 @media only screen and (max-device-width: 480px)
@@ -243,7 +243,8 @@ nav
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2)
   #instructions
-    p.button a
+    p.download a:link.button,
+    p.download a:visited.button,
       @include background-image(image-url("/images/download_glyph_2x.png"), linear-gradient(top, #9372F7,#6443C9))
       background-size: 11px 15px, 100%
 
@@ -252,7 +253,7 @@ nav
   //
   // * We can't show multiple background images (IE7 & IE8)
   // * We can't render CSS gradients (IE9)
-  #instructions p.button a:link,
-  #instructions p.button a:visited
+  #instructions p.download a:link.button,
+  #instructions p.download a:visited.button
     background-image: url("/images/download_glyph.png")
     background-position: 1.71428571em center
