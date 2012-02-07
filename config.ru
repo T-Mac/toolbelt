@@ -30,10 +30,19 @@ class Toolbelt < Sinatra::Base
         match.gsub(/\$(.*)\n/, "<span class=\"highlight\">$\\1</span>\n")
       end
     end
+
+    def useragent_platform
+      case request.user_agent
+        when /Mac OS X/ then :osx
+        when /Linux/    then :linux
+        when /Windows/  then :windows
+        else                 :osx
+      end
+    end
   end
 
   get "/" do
-    haml :index, :locals => { :platform => :osx }
+    haml :index, :locals => { :platform => useragent_platform }
   end
 
   %w( osx windows linux ).each do |platform|
