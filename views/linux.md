@@ -1,5 +1,5 @@
 <p class="button">
-    <input type="text" value="$ curl -L http://cl.ly/heroku | sudo bash" readonly>
+    <input type="text" value="$ curl -L http://cl.ly/h | sudo bash" readonly>
 </p>
 
 ### What is it?
