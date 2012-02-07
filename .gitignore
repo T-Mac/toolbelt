@@ -1,7 +1,0 @@
-.env
-.sass-cache
-/vendor
-/.bundle
-/freight
-/freight-lib
-/pkg
