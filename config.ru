@@ -92,6 +92,11 @@ class Toolbelt < Sinatra::Base
     content_type "text/plain"
     erb :install
   end
+
+  # legacy redirects
+  get("/osx/download")     { redirect "/osx"     }
+  get("/windows/download") { redirect "/windows" }
+  get("/linux/readme")     { redirect "/linux"   }
 end
 
 run Toolbelt
