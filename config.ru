@@ -65,6 +65,14 @@ class Toolbelt < Sinatra::Base
     redirect "http://heroku-toolbelt.s3.amazonaws.com/apt/#{dir}"
   end
 
+  get "/download/windows" do
+    redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt.exe"
+  end
+
+  get "/download/osx" do
+    redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt.pkg"
+  end
+
   # linux install instructions
   get "/install.sh" do
     content_type "text/plain"

@@ -1,5 +1,5 @@
 <p class="download">
-  <a href="/windows/download" class="button">Heroku Toolbelt for Windows</a>
+  <a href="/download/windows" class="button">Heroku Toolbelt for Windows</a>
 </p>
 
 ### What is it?
