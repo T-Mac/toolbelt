@@ -19,7 +19,6 @@ class Toolbelt < Sinatra::Base
     end
 
     set :haml, { :format => :html5 }
-    set :newest, newest_mtime
     set :sass, Compass.sass_engine_options
     set :static, true
     set :root, File.expand_path("../", __FILE__)
@@ -36,9 +35,11 @@ class Toolbelt < Sinatra::Base
     end
 
     def newest_mtime
-      Dir[File.join(settings.views, "**")].map do |file|
-        File.mtime(file)
-      end.sort.last
+      @newest_mtime ||= begin
+        Dir[File.join(settings.views, "**")].map do |file|
+          File.mtime(file)
+        end.sort.last
+      end
     end
 
     def useragent_platform
@@ -52,7 +53,7 @@ class Toolbelt < Sinatra::Base
   end
 
   get "/" do
-    last_modified settings.newest
+    last_modified newest_mtime
     haml :index, :locals => { :platform => useragent_platform }
   end
 
@@ -61,7 +62,7 @@ class Toolbelt < Sinatra::Base
       if request.xhr?
         markdown_plus platform.to_sym
       else
-        last_modified settings.newest
+        last_modified newest_mtime
         haml :index, :locals => { :platform => platform.to_sym }
       end
     end
