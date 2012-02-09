@@ -69,10 +69,8 @@ class Toolbelt < Sinatra::Base
   end
 
   get "/:name.css" do
-    sass_file = File.join(settings.views, "#{params[:name]}.sass")
-    return not_found unless File.exists?(sass_file)
-    last_modified File.mtime(sass_file)
-    sass params[:name].to_sym
+    last_modified newest_mtime
+    sass params[:name].to_sym rescue not_found
   end
 
   # apt repository
