@@ -34,6 +34,14 @@ class Toolbelt < Sinatra::Base
       end
     end
 
+    def newest_mtime
+      @newest_mtime ||= begin
+        Dir[File.join(settings.views, "**")].map do |file|
+          File.mtime(file)
+        end.sort.last
+      end
+    end
+
     def useragent_platform
       case request.user_agent
         when /Mac OS X/ then :osx
@@ -45,6 +53,7 @@ class Toolbelt < Sinatra::Base
   end
 
   get "/" do
+    last_modified newest_mtime
     haml :index, :locals => { :platform => useragent_platform }
   end
 
@@ -53,6 +62,7 @@ class Toolbelt < Sinatra::Base
       if request.xhr?
         markdown_plus platform.to_sym
       else
+        last_modified newest_mtime
         haml :index, :locals => { :platform => platform.to_sym }
       end
     end
