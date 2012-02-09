@@ -1,5 +1,5 @@
 <p class="download">
-    <code>wget -qO- <a href="https://toolbelt.heroku.com/install.sh">https://toolbelt.heroku.com/install.sh</a> | sh</code>
+    <code>wget -qO- <a href="/install.sh">https://toolbelt.heroku.com/install.sh</a> | sh</code>
 </p>
 
 ### What is it?
