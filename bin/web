@@ -7,7 +7,7 @@ ROOT=$(dirname $(dirname $0))
 export RUBYOPT="-I$ROOT/lib -rstdout"
 
 if [ "${RACK_ENV}" == "development" ]; then
-  exec bundle exec shotgun -s thin -E $RACK_ENV -p $PORT
+  exec bundle exec shotgun -s thin -E $RACK_ENV -p $PORT -o 0.0.0.0
 else
   exec bundle exec thin start -e $RACK_ENV -p $PORT
 fi
