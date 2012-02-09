@@ -20,6 +20,9 @@ class Toolbelt < Sinatra::Base
 
     set :haml, { :format => :html5 }
     set :sass, Compass.sass_engine_options
+    set :static, true
+    set :root, File.expand_path("../", __FILE__)
+    set :views, File.expand_path("../views", __FILE__)
   end
 
   helpers do
@@ -56,7 +59,10 @@ class Toolbelt < Sinatra::Base
   end
 
   get "/:name.css" do
-    sass params[:name].to_sym rescue not_found
+    sass_file = File.join(settings.views, "#{params[:name]}.sass")
+    return not_found unless File.exists?(sass_file)
+    last_modified File.mtime(sass_file)
+    sass params[:name].to_sym
   end
 
   # apt repository
@@ -80,5 +86,4 @@ class Toolbelt < Sinatra::Base
   end
 end
 
-use Rack::Static, :urls => %w( /apt /images /scripts ), :root => "public"
 run Toolbelt
