@@ -9,10 +9,10 @@ sudo -k
 sudo sh <<SCRIPT
 
   # add heroku repository to apt
-  echo "deb http://toolbelt.herokuapp.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
+  echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
 
   # install heroku's release key for package verification
-  wget -O- https://toolbelt.herokuapp.com/apt/release.key | apt-key add -
+  wget -O- https://toolbelt.heroku.com/apt/release.key | apt-key add -
 
   # update your sources
   apt-get update
