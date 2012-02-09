@@ -35,6 +35,7 @@ class Toolbelt < Sinatra::Base
     end
 
     def newest_mtime
+      return Time.now if development?
       @newest_mtime ||= begin
         Dir[File.join(settings.views, "**")].map do |file|
           File.mtime(file)
