@@ -10,6 +10,12 @@ require "sinatra"
 
 class Toolbelt < Sinatra::Base
 
+  def self.newest_mtime(dir)
+    Dir[File.join(dir, "**", "*")].map do |file|
+      File.mtime(file)
+    end.sort.last
+  end
+
   use Heroku::Nav::Header
 
   configure do
@@ -19,7 +25,7 @@ class Toolbelt < Sinatra::Base
     end
 
     set :haml, { :format => :html5 }
-    set :newest, newest_mtime
+    set :newest, newest_mtime(File.expand_path("../views", __FILE__))
     set :sass, Compass.sass_engine_options
     set :static, true
     set :root, File.expand_path("../", __FILE__)
@@ -33,12 +39,6 @@ class Toolbelt < Sinatra::Base
       content.gsub(/<code>(.*?)<\/code>/m) do |match|
         match.gsub(/\$(.*)\n/, "<span class=\"highlight\">$\\1</span>\n")
       end
-    end
-
-    def newest_mtime
-      Dir[File.join(settings.views, "**")].map do |file|
-        File.mtime(file)
-      end.sort.last
     end
 
     def useragent_platform
@@ -93,6 +93,7 @@ class Toolbelt < Sinatra::Base
     content_type "text/plain"
     erb :install
   end
+
 end
 
 run Toolbelt
