@@ -6,9 +6,9 @@
 
 The Heroku Toolbelt for Windows will give you everything you need to get started using Heroku. The installer contains:
 
-* A standalone version of the [heroku client](http://github.com/heroku/heroku)
-* [Foreman](http://github.com/ddollar/foreman) for running your apps locally
-* [Git](http://code.google.com/p/msysgit) for revision control and pushing to Heroku
+* [Heroku client](http://github.com/heroku/heroku) - CLI tool for creating and managing Heroku apps
+* [Foreman](http://github.com/ddollar/foreman) - an easy option for running your apps locally
+* [Git](http://code.google.com/p/git-osx-installer) - revision control and pushing to Heroku
 
 ### Getting started
 
