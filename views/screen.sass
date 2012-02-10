@@ -4,6 +4,9 @@
 $base_font_size: .875em
 $base_line_height: 1.28571429em
 
+html
+  -webkit-text-size-adjust: none
+
 body
   background: #1b1b24
   color: #8487AF
@@ -153,9 +156,11 @@ nav
         background: #111116
         @include box-shadow(0 1px 0 rgba(255, 255, 255, .02), 0 1px 2px rgba(0, 0, 0, .25) inset)
         color: #8487AF
-        padding: .642857143em 0
         text-align: center
         width: 37.6923077em
+
+        span
+          padding: .642857143em 1.71428571em
 
   ul
     list-style: disc
@@ -235,7 +240,7 @@ nav
     p.download code
       overflow-x: auto
       white-space: nowrap
-      width: 23.0769231em
+      width: 100%
 
 @media only screen and (max-device-width: 480px)
   // Don't zoom in on the Heroku header drop-down
