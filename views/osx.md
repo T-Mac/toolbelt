@@ -4,7 +4,7 @@
 
 ### What is it?
 
-The Heroku Toolbelt for OSX will give you everything you need to get started using Heroku. The installer contains:
+The Heroku Toolbelt for OS X will give you everything you need to get started using Heroku. The installer contains:
 
 * [Heroku client](http://github.com/heroku/heroku) - CLI tool for creating and managing Heroku apps
 * [Foreman](http://github.com/ddollar/foreman) - an easy option for running your apps locally
