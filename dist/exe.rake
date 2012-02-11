@@ -1,3 +1,5 @@
+require "erb"
+
 file pkg("heroku-#{version}.exe") do |t|
   tempdir do |dir|
     mkchdir("installers") do
@@ -23,7 +25,7 @@ end
 desc "Build exe"
 task "exe:build" => pkg("heroku-#{version}.exe")
 
-desc "Publish exe to S3."
+desc "Release exe"
 task "exe:release" => "exe:build" do |t|
   # store pkg("heroku-toolbelt-#{version}.pkg"), "heroku-toolbelt/heroku-toolbelt-#{version}.pkg"
   # store pkg("heroku-toolbelt-#{version}.pkg"), "heroku-toolbelt/heroku-toolbelt-beta.pkg" if beta?
