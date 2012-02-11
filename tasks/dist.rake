@@ -8,6 +8,17 @@ def beta?
   version =~ /pre/
 end
 
+def clean(file)
+  rm file if File.exists?(file)
+end
+
+def component_bundle(submodule, cmd)
+  Bundler.with_clean_env do
+    # TODO: talked with indirect; next bundler rc will make this unset unneeded
+    system "cd #{basedir}/components/#{submodule}; unset GEM_HOME RUBYOPT; bundle #{cmd}" or abort
+  end
+end
+
 def resource(name)
   File.expand_path("../../dist/resources/#{name}", __FILE__)
 end
@@ -22,13 +33,6 @@ end
 def pkg(filename)
   FileUtils.mkdir_p("#{basedir}/pkg")
   "#{basedir}/pkg/#{filename}"
-end
-
-def sub_bundle(submodule, cmd)
-  Bundler.with_clean_env do
-    # TODO: talked with indirect; next bundler rc will make this unset unneeded
-    system "cd #{basedir}/components/#{submodule}; unset GEM_HOME RUBYOPT; bundle #{cmd}" or abort
-  end
 end
 
 def s3_connect

@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <installer-script minSpecVersion="1.000000" authoringTool="org.ruby-lang.rake" authoringToolVersion="0.8.7">
   <title>Heroku Toolbelt</title>
-  <options customize="allow" allow-external-scripts="no"/>
+  <options customize="allow" allow-external-scripts="yes"/>
   <domains enable_localSystem="true"/>
+  <script>
+    function needs_git() {
+      return(system.run('has_git') != 0);
+    }
+  </script>
   <choices-outline>
     <line choice="foreman"/>
     <line choice="git"/>
     <line choice="heroku-client"/>
   </choices-outline>
-  <choice id="foreman" title="Foreman" start_selected="true" start_enabled="true" enabled="true">
+  <choice id="foreman" title="Foreman">
     <pkg-ref id="io.foreman.installer" />
   </choice>
-  <choice id="git" title="Git" start_selected="true" start_enabled="true" enabled="true">
+  <choice id="git" title="Git" selected="needs_git()">
     <pkg-ref id="git-etc.pkg" />
     <pkg-ref id="git-git.pkg" />
   </choice>
