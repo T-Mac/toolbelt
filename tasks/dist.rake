@@ -12,6 +12,13 @@ def resource(name)
   File.expand_path("../../dist/resources/#{name}", __FILE__)
 end
 
+def mkchdir(dir)
+  FileUtils.mkdir_p(dir)
+  Dir.chdir(dir) do |dir|
+    yield(File.expand_path(dir))
+  end
+end
+
 def pkg(filename)
   FileUtils.mkdir_p("#{basedir}/pkg")
   "#{basedir}/pkg/#{filename}"
