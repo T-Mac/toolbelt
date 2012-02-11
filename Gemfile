@@ -1,12 +1,21 @@
 source "http://rubygems.org"
 
-gem "rake"
-gem "aws-s3"
+gem "compass"
 gem "haml"
+gem "heroku-nav"
+gem "rake"
 gem "rdiscount"
 gem "sass"
-gem "compass"
 gem "sinatra"
-gem "heroku-nav"
-gem "thin"
-gem "shotgun"
+
+group :development do
+  gem "shotgun"
+end
+
+group :production do
+  gem "thin"
+end
+
+group :packaging do
+  gem "aws-s3"
+end
