@@ -1,11 +1,30 @@
 require "erb"
 
+def build_zip(name)
+  component_bundle name, "install --path vendor/bundle"
+  component_bundle name, "exec rake zip:clean zip:build"
+  Dir.glob("#{basedir}/components/#{name}/pkg/*.zip").first
+end
+
+def extract_zip(filename, destination)
+  tempdir do |dir|
+    sh %{ unzip #{filename} }
+    sh %{ mv * #{destination} }
+  end
+end
+
 file pkg("heroku-#{version}.exe") do |t|
   tempdir do |dir|
+    mkdir_p "#{dir}/heroku"
+    extract_zip build_zip("heroku"), "#{dir}/heroku/"
+
     mkchdir("installers") do
       system "curl http://heroku-toolbelt.s3.amazonaws.com/rubyinstaller.exe -o rubyinstaller.exe"
       system "curl http://heroku-toolbelt.s3.amazonaws.com/git.exe -o git.exe"
     end
+
+    cp resource("exe/heroku.bat"), "heroku/bin/heroku.bat"
+    cp resource("exe/heroku"),     "heroku/bin/heroku"
 
     File.open("heroku.iss", "w") do |iss|
       iss.write(ERB.new(File.read(resource("exe/heroku.iss"))).result(binding))

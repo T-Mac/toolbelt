@@ -9,6 +9,7 @@ OutputBaseFilename=<%= File.basename(t.name, ".exe") %>
 OutputDir=<%= File.dirname(t.name) %>
 ChangesEnvironment=yes
 UsePreviousSetupType=no
+AlwaysShowComponentsList=no
 
 ; For Ruby expansion ~ 32MB (installed) - 12MB (installer)
 ExtraDiskSpaceRequired=20971520
@@ -25,10 +26,15 @@ Name: "toolbelt/git"; Description: "Git"; Types: "client custom"; Check: "not Is
 Name: "toolbelt/git"; Description: "Git"; Check: "IsProgramInstalled('git.exe')"
 
 [Files]
-Source: "installers\git.exe"; DestDir: "{tmp}"; Components: "toolbelt/git"
+Source: "heroku\*.*"; DestDir: "{app}"; Flags: recursesubdirs; Components: "toolbelt/client"
 Source: "installers\rubyinstaller.exe"; DestDir: "{tmp}"; Components: "toolbelt/client"
+Source: "installers\git.exe"; DestDir: "{tmp}"; Components: "toolbelt/git"
 
 [Registry]
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; ValueType: "expandsz"; ValueName: "HerokuPath"; \
+  ValueData: "{app}"
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; ValueType: "expandsz"; ValueName: "Path"; \
+  ValueData: "{olddata};{app}\bin"; Check: NeedsAddPath(ExpandConstant('{app}\bin'))
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; ValueType: "expandsz"; ValueName: "Path"; \
   ValueData: "{olddata};{pf}\git\bin"; Check: NeedsAddPath(ExpandConstant('{pf}\git\bin'))
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; ValueType: "expandsz"; ValueName: "Path"; \
@@ -37,11 +43,11 @@ Root: HKCU; Subkey: "Environment"; ValueType: "expandsz"; ValueName: "HOME"; \
   ValueData: "%USERPROFILE%"; Flags: createvalueifdoesntexist
 
 [Run]
-Filename: "{tmp}\rubyinstaller.exe"; Parameters: "/verysilent /noreboot /nocancel /noicons /dir=""{pf}/ruby"""; \
+Filename: "{tmp}\rubyinstaller.exe"; Parameters: "/verysilent /noreboot /nocancel /noicons /dir=""{pf}/ruby-1.9.3"""; \
   Flags: shellexec waituntilterminated; StatusMsg: "Installing Ruby"; Components: "toolbelt/client"
-Filename: "{pf}\ruby\bin\gem.bat"; Parameters: "install heroku --no-rdoc --no-ri"; \
+Filename: "{pf}\ruby-1.9.3\bin\gem.bat"; Parameters: "install heroku --no-rdoc --no-ri"; \
   Flags: runhidden shellexec waituntilterminated; StatusMsg: "Installing Heroku Client"; Components: "toolbelt/client"
-Filename: "{pf}\ruby\bin\gem.bat"; Parameters: "install foreman --no-rdoc --no-ri"; \
+Filename: "{pf}\ruby-1.9.3\bin\gem.bat"; Parameters: "install foreman --no-rdoc --no-ri"; \
   Flags: runhidden shellexec waituntilterminated; StatusMsg: "Installing Foreman"; Components: "toolbelt/foreman"
 Filename: "{tmp}\git.exe"; Parameters: "/silent /nocancel /noicons"; \
   Flags: shellexec waituntilterminated; StatusMsg: "Installing Git"; Components: "toolbelt/git"

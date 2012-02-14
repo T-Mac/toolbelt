@@ -14,9 +14,10 @@ def clean(file)
 end
 
 def component_bundle(submodule, cmd)
-  Bundler.with_clean_env do
-    # TODO: talked with indirect; next bundler rc will make this unset unneeded
-    system "cd #{basedir}/components/#{submodule}; unset GEM_HOME RUBYOPT; bundle #{cmd}" or abort
+  Dir.chdir "#{basedir}/components/#{submodule}" do
+    Bundler.with_clean_env do
+      system "bundle #{cmd}" or abort
+    end
   end
 end
 
