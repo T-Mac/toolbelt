@@ -46,7 +46,7 @@ task "exe:build" => pkg("heroku-#{version}.exe")
 
 desc "Release exe"
 task "exe:release" => "exe:build" do |t|
-  # store pkg("heroku-toolbelt-#{version}.pkg"), "heroku-toolbelt/heroku-toolbelt-#{version}.pkg"
-  # store pkg("heroku-toolbelt-#{version}.pkg"), "heroku-toolbelt/heroku-toolbelt-beta.pkg" if beta?
-  # store pkg("heroku-toolbelt-#{version}.pkg"), "heroku-toolbelt/heroku-toolbelt.pkg" unless beta?
+  store pkg("heroku-#{version}.exe"), "heroku-toolbelt/heroku-toolbelt-#{version}.exe"
+  store pkg("heroku-#{version}.exe"), "heroku-toolbelt/heroku-toolbelt-beta.exe" if beta?
+  store pkg("heroku-#{version}.exe"), "heroku-toolbelt/heroku-toolbelt.exe" unless beta?
 end
