@@ -4,8 +4,6 @@
 
 ### What is it?
 
-The Heroku Toolbelt for Debian/Ubuntu will give you everything you need to get started using Heroku. The installer contains:
-
 * [Heroku client](http://github.com/heroku/heroku) - CLI tool for creating and managing Heroku apps
 * [Foreman](http://github.com/ddollar/foreman) - an easy option for running your apps locally
 * [Git](http://code.google.com/p/git-osx-installer) - revision control and pushing to Heroku
