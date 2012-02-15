@@ -1,14 +1,13 @@
 def build_deb(name)
   component_bundle name, "install --path vendor/bundle"
   component_bundle name, "exec rake deb:clean deb:build"
-  Dir.glob("#{basedir}/components/#{name}/pkg/apt*/*deb").first
+  Dir["#{basedir}/components/#{name}/pkg/apt*/*deb"].first
 end
 
-desc "Build an apt-get repository with freight"
+desc "Build deb"
 file pkg("heroku-#{version}.apt") do |t|
   mkchdir(t.name) do |dir|
-
-    cp build_deb("heroku"), "./"
+    cp build_deb("heroku"),  "./"
     cp build_deb("foreman"), "./"
 
     touch "Sources"
