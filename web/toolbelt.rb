@@ -24,7 +24,7 @@ class Toolbelt < Sinatra::Base
 
   configure :production do
     require "rack-ssl-enforcer"
-    use Rack::SslEnforcer
+    use Rack::SslEnforcer, :except => %r{^/ubuntu/}
   end
 
   helpers do
