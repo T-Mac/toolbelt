@@ -1,5 +1,3 @@
-debs = ["heroku", "foreman"]
-
 def build_deb(name)
   component_bundle name, "install --path vendor/bundle"
   component_bundle name, "exec rake deb:clean deb:build"
@@ -7,17 +5,14 @@ def build_deb(name)
 end
 
 desc "Build an apt-get repository with freight"
-file pkg("heroku-#{version}.apt") do
-  FileUtils.mkdir_p "apt"
+file pkg("heroku-#{version}.apt") do |t|
+  mkchdir(t.name) do |dir|
 
-  paths = debs.map {|dep| File.expand_path build_deb(dep) }
-
-  Dir.chdir("apt") do
-    paths.each do |path|
-      FileUtils.cp(path, File.basename(path))
-    end
+    cp build_deb("heroku"), "./"
+    cp build_deb("foreman", "./"
 
     touch "Sources"
+
     sh "apt-ftparchive packages . > Packages"
     sh "gzip -c Packages > Packages.gz"
     sh "apt-ftparchive release . > Release"

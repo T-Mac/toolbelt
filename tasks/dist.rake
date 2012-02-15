@@ -16,7 +16,7 @@ end
 def component_bundle(submodule, cmd)
   Dir.chdir "#{basedir}/components/#{submodule}" do
     Bundler.with_clean_env do
-      system "bundle #{cmd}" or abort
+      sh "bundle #{cmd}" or abort
     end
   end
 end
