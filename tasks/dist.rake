@@ -16,7 +16,11 @@ end
 def component_bundle(submodule, cmd)
   Dir.chdir "#{basedir}/components/#{submodule}" do
     Bundler.with_clean_env do
-      sh "unset GEM_HOME RUBYOPT; bundle #{cmd}" or abort
+      if windows?
+        sh "set GEM_HOME= RUBYOPT=; bundle #{cmd}" or abort
+      else
+        sh "unset GEM_HOME RUBYOPT; bundle #{cmd}" or abort
+      end
     end
   end
 end
@@ -72,6 +76,10 @@ end
 
 def version
   @version ||= %x{ ruby -r#{basedir}/components/heroku/lib/heroku/version.rb -e "puts Heroku::VERSION" }.chomp
+end
+
+def windows?
+  defined?(RUBY_PLATFORM) and RUBY_PLATFORM =~ /(win|w)32$/
 end
 
 Dir[File.expand_path("../../dist/**/*.rake", __FILE__)].each do |rake|
