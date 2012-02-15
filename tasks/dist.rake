@@ -10,7 +10,7 @@ def beta?
 end
 
 def clean(file)
-  rm_f file if File.exists?(file)
+  rm_rf file if File.exists?(file)
 end
 
 def component_bundle(submodule, cmd)
