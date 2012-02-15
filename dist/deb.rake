@@ -6,13 +6,8 @@ def build_deb(name)
   Dir.glob("#{basedir}/components/#{name}/pkg/apt*/*deb").first
 end
 
-desc "Clear out apt-get repository files"
-task "deb:clean" do
-  FileUtils.rm_rf "apt"
-end
-
 desc "Build an apt-get repository with freight"
-task "deb:repository" do
+file pkg("heroku-#{version}.ap") do
   FileUtils.mkdir_p "apt"
 
   paths = debs.map {|dep| File.expand_path build_deb(dep) }
@@ -30,11 +25,23 @@ task "deb:repository" do
   end
 end
 
+desc "Clean deb"
+task "deb:clean" do
+  clean pkg("heroku-#{version}.apt")
+end
+
+desc "Build deb"
+task "deb:build" => pkg("heroku-#{version}.apt")
+
+desc "Release deb"
+task "deb:release" => "deb:build" do |t|
+end
+
 desc "Publish apt-get repository to S3."
 task "deb:release" => "deb:repository" do |t|
-  Find.find("apt").each do |file|
+  Dir[File.join(pkg("heroku-#{version}.apt"), "**", "*")].each do |file|
     unless File.directory?(file)
-      store file, file, ENV["HEROKU_RELEASE_BUCKET"] || "heroku-toolbelt"
+      store file, file
     end
   end
 end
