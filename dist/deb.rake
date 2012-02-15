@@ -1,8 +1,8 @@
 debs = ["heroku", "foreman"]
 
 def build_deb(name)
-  sub_bundle name, "install --path vendor/bundle"
-  sub_bundle name, "exec rake deb:clean deb:build"
+  component_bundle name, "install --path vendor/bundle"
+  component_bundle name, "exec rake deb:clean deb:build"
   Dir.glob("#{basedir}/components/#{name}/pkg/apt*/*deb").first
 end
 
@@ -34,10 +34,6 @@ desc "Build deb"
 task "deb:build" => pkg("heroku-#{version}.apt")
 
 desc "Release deb"
-task "deb:release" => "deb:build" do |t|
-end
-
-desc "Publish apt-get repository to S3."
 task "deb:release" => "deb:repository" do |t|
   Dir[File.join(pkg("heroku-#{version}.apt"), "**", "*")].each do |file|
     unless File.directory?(file)
