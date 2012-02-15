@@ -12,10 +12,6 @@ group :development do
   gem "shotgun"
 end
 
-group :production do
-  gem "thin"
-end
-
 group :packaging do
   gem "fog"
 end
