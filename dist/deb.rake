@@ -7,7 +7,7 @@ def build_deb(name)
 end
 
 desc "Build an apt-get repository with freight"
-file pkg("heroku-#{version}.ap") do
+file pkg("heroku-#{version}.apt") do
   FileUtils.mkdir_p "apt"
 
   paths = debs.map {|dep| File.expand_path build_deb(dep) }
