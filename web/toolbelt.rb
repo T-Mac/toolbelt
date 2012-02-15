@@ -22,6 +22,11 @@ class Toolbelt < Sinatra::Base
     set :views, File.expand_path("../views", __FILE__)
   end
 
+  configure :production do
+    require "rack-ssl-enforcer"
+    use Rack::SslEnforcer
+  end
+
   helpers do
     def markdown_plus(partial, opts={})
       content = markdown(partial, opts)
