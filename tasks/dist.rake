@@ -16,8 +16,7 @@ end
 def component_bundle(submodule, cmd)
   Dir.chdir "#{basedir}/components/#{submodule}" do
     Bundler.with_clean_env do
-      puts ENV.inspect
-      sh "bundle #{cmd}" or abort
+      sh "unset GEM_HOME RUBYOPT; bundle #{cmd}" or abort
     end
   end
 end
