@@ -17,7 +17,7 @@ def component_bundle(submodule, cmd)
   Dir.chdir "#{basedir}/components/#{submodule}" do
     Bundler.with_clean_env do
       if windows?
-        sh "set GEM_HOME= RUBYOPT=; bundle #{cmd}" or abort
+        sh "set GEM_HOME= RUBYOPT= && bundle #{cmd}" or abort
       else
         sh "unset GEM_HOME RUBYOPT; bundle #{cmd}" or abort
       end
