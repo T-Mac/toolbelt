@@ -9,7 +9,7 @@ file pkg("heroku-#{version}.apt") do |t|
   mkchdir(t.name) do |dir|
 
     cp build_deb("heroku"), "./"
-    cp build_deb("foreman", "./"
+    cp build_deb("foreman"), "./"
 
     touch "Sources"
 
