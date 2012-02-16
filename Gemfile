@@ -18,5 +18,5 @@ group :production do
 end
 
 group :packaging do
-  gem "fog"
+  gem "aws-s3"
 end

@@ -1,4 +1,3 @@
-require "fog"
 require "tmpdir"
 
 def basedir
@@ -41,29 +40,28 @@ def pkg(filename)
   "#{basedir}/pkg/#{filename}"
 end
 
-def s3
+def s3_connect
+  return if @s3_connected
+
+  require "aws/s3"
+
   unless ENV["HEROKU_RELEASE_ACCESS"] && ENV["HEROKU_RELEASE_SECRET"]
     abort("please set HEROKU_RELEASE_ACCESS and HEROKU_RELEASE_SECRET")
   end
 
-  @s3 ||= Fog::Storage.new(
-    :provider              => :aws,
-    :aws_access_key_id     => ENV["HEROKU_RELEASE_ACCESS"],
-    :aws_secret_access_key => ENV["HEROKU_RELEASE_SECRET"]
+  AWS::S3::Base.establish_connection!(
+    :access_key_id => ENV["HEROKU_RELEASE_ACCESS"],
+    :secret_access_key => ENV["HEROKU_RELEASE_SECRET"]
   )
+
+  @s3_connected = true
 end
 
-def store(local, remote, bucket="assets.heroku.com")
-  puts "storing: %s/%s" % [ bucket, remote ]
-  dir = s3
-  parts = remote.split("/")
-  remote_filename = parts.pop
-  begin
-    parts.each { |part| dir = dir.directories.get(part) }
-  rescue
-    abort "couldnt find directory: #{parts.join("/")}"
-  end
-  dir.files.create(:key => remote, :body => File.open(local), :public => true)
+def store(package_file, filename, bucket="assets.heroku.com")
+  s3_connect
+  puts "storing: #{filename} in #{bucket}"
+  AWS::S3::S3Object.store(filename, File.open(package_file), bucket,
+                          :access => :public_read)
 end
 
 def tempdir
