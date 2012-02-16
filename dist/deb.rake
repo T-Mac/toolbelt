@@ -28,10 +28,11 @@ desc "Build deb"
 task "deb:build" => pkg("heroku-#{version}.apt")
 
 desc "Release deb"
-task "deb:release" => "deb:repository" do |t|
+task "deb:release" => "deb:build" do |t|
   Dir[File.join(pkg("heroku-#{version}.apt"), "**", "*")].each do |file|
     unless File.directory?(file)
-      store file, file
+      remote = file.gsub(pkg("heroku-#{version}.apt"), "apt")
+      store file, remote, "heroku-toolbelt"
     end
   end
 end
