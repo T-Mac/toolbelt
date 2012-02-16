@@ -15,10 +15,10 @@ end
 def component_bundle(submodule, cmd)
   Dir.chdir "#{basedir}/components/#{submodule}" do
     Bundler.with_clean_env do
-      if windows?
-        sh "set GEM_HOME= && set RUBYOPT= && set && bundle #{cmd}" or abort
-      else
-        sh "unset GEM_HOME RUBYOPT; bundle #{cmd}" or abort
+      preserving_env do
+        ENV.delete "GEM_HOME"
+        ENV.delete "RUBYOPT"
+        sh "bundle #{cmd}"
       end
     end
   end
@@ -40,11 +40,17 @@ def pkg(filename)
   "#{basedir}/pkg/#{filename}"
 end
 
-def s3_connect
-  return if @s3_connected
+def preserving_env
+  old_env = ENV.to_hash
+  begin
+    yield
+  ensure
+    ENV.clear
+    ENV.update(old_env)
+  end
+end
 
-  require "aws/s3"
-
+def s3
   unless ENV["HEROKU_RELEASE_ACCESS"] && ENV["HEROKU_RELEASE_SECRET"]
     abort("please set HEROKU_RELEASE_ACCESS and HEROKU_RELEASE_SECRET")
   end
