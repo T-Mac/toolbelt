@@ -13,13 +13,11 @@ def clean(file)
 end
 
 def component_bundle(submodule, cmd)
-  Dir.chdir "#{basedir}/components/#{submodule}" do
-    Bundler.with_clean_env do
-      if windows?
-        sh "set BUNDLE_BIN_PATH= && set BUNDLE_GEMFILE= && set RUBYOPT= && set && bundle #{cmd}" or abort
-      else
-        sh "unset GEM_HOME RUBYOPT; bundle #{cmd}" or abort
-      end
+  Bundler.with_clean_env do
+    if windows?
+      sh "cd #{basedir}/components/#{submodule} && set BUNDLE_BIN_PATH= && set BUNDLE_GEMFILE= && set RUBYOPT= && set && bundle #{cmd}" or abort
+    else
+      sh "cd #{basedir}/components/#{submodule} && unset GEM_HOME RUBYOPT; bundle #{cmd}" or abort
     end
   end
 end
