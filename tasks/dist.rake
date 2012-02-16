@@ -15,10 +15,10 @@ end
 def component_bundle(submodule, cmd)
   Dir.chdir "#{basedir}/components/#{submodule}" do
     Bundler.with_clean_env do
-      preserving_env do
-        ENV.delete "GEM_HOME"
-        ENV.delete "RUBYOPT"
-        sh "bundle #{cmd}"
+      if windows?
+        sh "set GEM_HOME= && set RUBYOPT= && set && bundle #{cmd}" or abort
+      else
+        sh "unset GEM_HOME RUBYOPT; bundle #{cmd}" or abort
       end
     end
   end
@@ -38,16 +38,6 @@ end
 def pkg(filename)
   FileUtils.mkdir_p("#{basedir}/pkg")
   "#{basedir}/pkg/#{filename}"
-end
-
-def preserving_env
-  old_env = ENV.to_hash
-  begin
-    yield
-  ensure
-    ENV.clear
-    ENV.update(old_env)
-  end
 end
 
 def s3
