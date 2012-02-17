@@ -25,7 +25,7 @@ def component_bundle(submodule, cmd)
 end
 
 def component_dir(submodule)
-  File.join(basedir, "components", "submodule")
+  File.join(basedir, "components", submodule)
 end
 
 def resource(name)
