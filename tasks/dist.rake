@@ -44,7 +44,7 @@ def pkg(filename)
   "#{basedir}/pkg/#{filename}"
 end
 
-def s3
+def s3_connect
   unless ENV["HEROKU_RELEASE_ACCESS"] && ENV["HEROKU_RELEASE_SECRET"]
     abort("please set HEROKU_RELEASE_ACCESS and HEROKU_RELEASE_SECRET")
   end
