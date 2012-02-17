@@ -1,6 +1,7 @@
 require "erb"
 
 def build_zip(name)
+  rm_rf "#{component_dir(name)}/.bundle"
   component_bundle name, "install --path vendor/bundle"
   component_bundle name, "exec rake zip:clean zip:build"
   Dir.glob("#{basedir}/components/#{name}/pkg/*.zip").first

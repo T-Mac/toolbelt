@@ -14,7 +14,7 @@ end
 
 def component_bundle(submodule, cmd)
   Bundler.with_clean_env do
-    Dir.chdir("#{basedir}/components/#{submodule}") do
+    Dir.chdir(component_dir(submodule)) do
       if windows?
         sh "dir && set BUNDLE_BIN_PATH= && set BUNDLE_GEMFILE= && set GEM_HOME= && set RUBYOPT= && set && bundle #{cmd}" or abort
       else
@@ -22,6 +22,10 @@ def component_bundle(submodule, cmd)
       end
     end
   end
+end
+
+def component_dir(submodule)
+  File.join(basedir, "components", "submodule")
 end
 
 def resource(name)
