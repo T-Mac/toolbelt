@@ -44,24 +44,30 @@ def pkg(filename)
   "#{basedir}/pkg/#{filename}"
 end
 
-def s3_connect
-  unless ENV["HEROKU_RELEASE_ACCESS"] && ENV["HEROKU_RELEASE_SECRET"]
-    abort("please set HEROKU_RELEASE_ACCESS and HEROKU_RELEASE_SECRET")
+def s3
+  @s3 ||= begin
+    require 'fog'
+
+    unless ENV["HEROKU_RELEASE_ACCESS"] && ENV["HEROKU_RELEASE_SECRET"]
+      abort("please set HEROKU_RELEASE_ACCESS and HEROKU_RELEASE_SECRET")
+    end
+
+    Fog::Storage.new(
+      :provider               => 'AWS',
+      :aws_access_key_id      => ENV["HEROKU_RELEASE_ACCESS"],
+      :aws_secret_access_key  => ENV["HEROKU_RELEASE_SECRET"]
+    )
   end
-
-  AWS::S3::Base.establish_connection!(
-    :access_key_id => ENV["HEROKU_RELEASE_ACCESS"],
-    :secret_access_key => ENV["HEROKU_RELEASE_SECRET"]
-  )
-
-  @s3_connected = true
 end
 
-def store(package_file, filename, bucket="assets.heroku.com")
-  s3_connect
-  puts "storing: #{filename} in #{bucket}"
-  AWS::S3::S3Object.store(filename, File.open(package_file), bucket,
-                          :access => :public_read)
+def store(local, remote, bucket="assets.heroku.com")
+  puts "storing: #{bucket}/#{remote}"
+  directory = s3.directories.new(:key => bucket)
+  directory.files.create(
+    :key    => remote,
+    :body   => File.open(local),
+    :public => true
+  )
 end
 
 def tempdir
