@@ -1,9 +1,11 @@
 require "erb"
 
 def build_pkg(name)
+  rm_rf "#{component_dir(name)}/.bundle"
+  rm_rf Dir["#{basedir}/components/#{name}/pkg/*.pkg"]
   component_bundle name, "install --path vendor/bundle"
   component_bundle name, "exec rake pkg:clean pkg:build"
-  Dir.glob("#{basedir}/components/#{name}/pkg/*.pkg").first
+  Dir["#{basedir}/components/#{name}/pkg/*.pkg"].first
 end
 
 def extract_pkg(filename, destination)

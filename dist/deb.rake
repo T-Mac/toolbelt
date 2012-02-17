@@ -1,4 +1,6 @@
 def build_deb(name)
+  rm_rf "#{component_dir(name)}/.bundle"
+  rm_rf Dir["#{basedir}/components/#{name}/pkg/apt*"]
   component_bundle name, "install --path vendor/bundle"
   component_bundle name, "exec rake deb:clean deb:build"
   Dir["#{basedir}/components/#{name}/pkg/apt*/*deb"].first
