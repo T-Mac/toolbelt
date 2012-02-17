@@ -13,7 +13,7 @@ def extract_zip(filename, destination)
   end
 end
 
-file pkg("heroku-#{version}.exe") do |t|
+file pkg("heroku-toolbelt-#{version}.exe") do |t|
   tempdir do |dir|
     mkdir_p "#{dir}/heroku"
     extract_zip build_zip("heroku"), "#{dir}/heroku/"
@@ -38,15 +38,15 @@ end
 
 desc "Clean exe"
 task "exe:clean" do
-  clean pkg("heroku-#{version}.exe")
+  clean pkg("heroku-toolbelt-#{version}.exe")
 end
 
 desc "Build exe"
-task "exe:build" => pkg("heroku-#{version}.exe")
+task "exe:build" => pkg("heroku-toolbelt-#{version}.exe")
 
 desc "Release exe"
 task "exe:release" => "exe:build" do |t|
-  store pkg("heroku-#{version}.exe"), "heroku-toolbelt/heroku-toolbelt-#{version}.exe"
-  store pkg("heroku-#{version}.exe"), "heroku-toolbelt/heroku-toolbelt-beta.exe" if beta?
-  store pkg("heroku-#{version}.exe"), "heroku-toolbelt/heroku-toolbelt.exe" unless beta?
+  store pkg("heroku-toolbelt-#{version}.exe"), "heroku-toolbelt/heroku-toolbelt-#{version}.exe"
+  store pkg("heroku-toolbelt-#{version}.exe"), "heroku-toolbelt/heroku-toolbelt-beta.exe" if beta?
+  store pkg("heroku-toolbelt-#{version}.exe"), "heroku-toolbelt/heroku-toolbelt.exe" unless beta?
 end

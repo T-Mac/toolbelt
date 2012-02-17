@@ -13,7 +13,7 @@ def extract_pkg(filename, destination)
   end
 end
 
-file pkg("heroku-#{version}.pkg") do |t|
+file pkg("heroku-toolbelt-#{version}.pkg") do |t|
   tempdir do |dir|
     mkdir_p "pkg"
     mkdir_p "pkg/Resources"
@@ -44,11 +44,11 @@ end
 
 desc "Clean pkg"
 task "pkg:clean" do
-  clean pkg("heroku-#{version}.pkg")
+  clean pkg("heroku-toolbelt-#{version}.pkg")
 end
 
 desc "Build pkg"
-task "pkg:build" => pkg("heroku-#{version}.pkg")
+task "pkg:build" => pkg("heroku-toolbelt-#{version}.pkg")
 
 desc "Release pkg"
 task "pkg:release" => "pkg:build" do |t|

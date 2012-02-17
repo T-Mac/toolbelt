@@ -5,7 +5,7 @@ def build_deb(name)
 end
 
 desc "Build deb"
-file pkg("heroku-#{version}.apt") do |t|
+file pkg("heroku-toolbelt-#{version}.apt") do |t|
   mkchdir(t.name) do |dir|
     cp build_deb("heroku"),  "./"
     cp build_deb("foreman"), "./"
@@ -21,17 +21,17 @@ end
 
 desc "Clean deb"
 task "deb:clean" do
-  clean pkg("heroku-#{version}.apt")
+  clean pkg("heroku-toolbelt-#{version}.apt")
 end
 
 desc "Build deb"
-task "deb:build" => pkg("heroku-#{version}.apt")
+task "deb:build" => pkg("heroku-toolbelt-#{version}.apt")
 
 desc "Release deb"
 task "deb:release" => "deb:build" do |t|
-  Dir[File.join(pkg("heroku-#{version}.apt"), "**", "*")].each do |file|
+  Dir[File.join(pkg("heroku-toolbelt-#{version}.apt"), "**", "*")].each do |file|
     unless File.directory?(file)
-      remote = file.gsub(pkg("heroku-#{version}.apt"), "apt")
+      remote = file.gsub(pkg("heroku-toolbelt-#{version}.apt"), "apt")
       store file, remote, "heroku-toolbelt"
     end
   end
