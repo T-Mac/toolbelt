@@ -1,7 +1,9 @@
 @ECHO OFF
 
 :: determine if this is x86 or x64
-if "%ProgramFiles%" == "%ProgramW6432%" goto x64
+if "%processor_architecture%" == "IA64"  goto x64
+if "%processor_architecture%" == "AMD64" goto x64
+if "%ProgramFiles%" == "%ProgramW6432%"  goto x64
 goto x86
 
 :x86
