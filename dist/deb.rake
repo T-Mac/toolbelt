@@ -16,6 +16,8 @@ end
 
 desc "Construct repository"
 file pkg("heroku-toolbelt-#{version}.apt") do |t|
+  abort "Don't publish .debs of pre-releases!" if version =~ /[a-zA-Z]$/
+
   mkchdir(t.name) do |dir|
     cp build_deb("heroku"),  "./"
     cp build_deb("foreman"), "./"
