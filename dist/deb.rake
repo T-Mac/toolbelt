@@ -52,6 +52,8 @@ desc "Build repository and metapackage"
 task "deb:repository" => [pkg("deb/heroku-toolbelt-#{version}.deb"),
                           pkg("heroku-toolbelt-#{version}.apt")]
 
+task "deb:build" => "deb:repository"
+
 desc "Release deb"
 task "deb:release" => "deb:repository" do |t|
   Dir[File.join(pkg("heroku-toolbelt-#{version}.apt"), "**", "*")].each do |file|
