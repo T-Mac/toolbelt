@@ -25,9 +25,9 @@ The packaging tasks vary by platform:
     $ bundle exec rake pkg:build # build an OS X .pkg file
     $ bundle exec rake exe:build # build an .exe file for Windows
 
-Each one has a corresponding "*:release" task which also pushes the
-artifacts up to S3. This requires the "HEROKU_RELEASE_ACCESS" and
-"HEROKU_RELEASE_SECRET" environment variables to be set to the proper
+Each one has a corresponding `*:release` task which also pushes the
+artifacts up to S3. This requires the `HEROKU_RELEASE_ACCESS` and
+`HEROKU_RELEASE_SECRET` environment variables to be set to the proper
 AWS credentials.
 
 # License
