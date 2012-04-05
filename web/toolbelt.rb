@@ -55,6 +55,19 @@ class Toolbelt < Sinatra::Base
         else                 :osx
       end
     end
+
+    def protected!
+      unless authorized?
+        response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
+        throw(:halt, [401, "Not authorized\n"])
+      end
+    end
+
+    def authorized?
+      @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+      @auth.provided? && @auth.basic? && @auth.credentials &&
+        @auth.credentials == [ENV["USERNAME"], ENV["PASSWORD"]]
+    end
   end
 
   def db
@@ -120,6 +133,7 @@ class Toolbelt < Sinatra::Base
   end
 
   get "/stats/:days" do |days|
+    protected!
     query = "SELECT os, COUNT(*) FROM stats WHERE stamp > $1 GROUP BY os"
     stats = db.exec(query, [Time.now - (days.to_i * 86400)]).values
     content_type :json
