@@ -11,6 +11,15 @@ instructions and downloads for the toolbelt packages and 1) tasks
 to perform the packaging itself. The `bin/web` script will launch the
 web site, while the packaging is handled with rake.
 
+# Setup
+
+The toolbelt stores download statistics in Postgres:
+
+    $ initdb pg
+    $ postgres -D pg # in a separate terminal
+    $ createdb toolbelt
+    $ cat toolbelt.sql | psql toolbelt
+
 # Packaging
 
 First pull in the dependencies with bundler, then pull in the

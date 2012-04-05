@@ -4,6 +4,8 @@ require "compass"
 require "rdiscount"
 require "heroku/nav"
 require "sinatra"
+require "pg"
+require "json"
 
 class Toolbelt < Sinatra::Base
 
@@ -54,6 +56,11 @@ class Toolbelt < Sinatra::Base
     end
   end
 
+  def record_hit os
+    PG.connect(dbname: "toolbelt").
+      exec("INSERT INTO stats (os) VALUES ($1)", [os])
+  end
+
   get "/" do
     last_modified newest_mtime
     haml :index, :locals => { :platform => useragent_platform }
@@ -82,17 +89,29 @@ class Toolbelt < Sinatra::Base
   end
 
   get "/download/windows" do
+    record_hit "windows"
     redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt.exe"
   end
 
   get "/download/osx" do
+    record_hit "osx"
     redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt.pkg"
   end
 
   # linux install instructions
   get "/install.sh" do
+    record_hit "debian" unless request.user_agent =~ /curl|wget/
     content_type "text/plain"
     erb :install
+  end
+
+  get "/stats/:days" do |days|
+    conn = PG.connect(dbname: "toolbelt")
+    query = "SELECT os, COUNT(*) FROM stats WHERE stamp > $1 GROUP BY os"
+    stats = conn.exec(query, [Time.now - (days.to_i * 86400)]).values
+    content_type :json
+    # I forget what the converse of Hash#to_a is, so...
+    stats.inject({}){|x, p| x[p[0]] = p[1].to_i; x}.to_json
   end
 
   # legacy redirects
