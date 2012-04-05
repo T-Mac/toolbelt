@@ -71,7 +71,7 @@ class Toolbelt < Sinatra::Base
 
   def record_hit os
     db.exec("INSERT INTO stats (os) VALUES ($1)", [os])
-  rescue Exception => e
+  rescue StandardError => e
     puts e.backtrace.join("\n")
   end
 
