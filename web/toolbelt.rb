@@ -58,7 +58,7 @@ class Toolbelt < Sinatra::Base
   end
 
   def db
-    if connection = Thread.current[:db] && !connection.finished?
+    if (connection = Thread.current[:db]) && !connection.finished?
       connection # poor man's connection pooling
     else
       uri = URI.parse(ENV["DATABASE_URL"])
