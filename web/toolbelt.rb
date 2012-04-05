@@ -6,6 +6,7 @@ require "heroku/nav"
 require "sinatra"
 require "pg"
 require "json"
+require "uri"
 
 class Toolbelt < Sinatra::Base
 
@@ -56,9 +57,20 @@ class Toolbelt < Sinatra::Base
     end
   end
 
+  def db
+    if connection = Thread.current[:db] && !connection.finished?
+      connection # poor man's connection pooling
+    else
+      uri = URI.parse(ENV["DATABASE_URL"])
+      params = {:host => uri.host, :port => uri.port, :dbname => uri.path[1 .. -1]}
+      params.merge!({:user => uri.user, :password => uri.password}) if (uri.user && uri.password)
+
+      Thread.current[:db] = PG.connect(params)
+    end
+  end
+
   def record_hit os
-    PG.connect(dbname: "toolbelt").
-      exec("INSERT INTO stats (os) VALUES ($1)", [os])
+    db.exec("INSERT INTO stats (os) VALUES ($1)", [os])
   end
 
   get "/" do
@@ -106,9 +118,8 @@ class Toolbelt < Sinatra::Base
   end
 
   get "/stats/:days" do |days|
-    conn = PG.connect(dbname: "toolbelt")
     query = "SELECT os, COUNT(*) FROM stats WHERE stamp > $1 GROUP BY os"
-    stats = conn.exec(query, [Time.now - (days.to_i * 86400)]).values
+    stats = db.exec(query, [Time.now - (days.to_i * 86400)]).values
     content_type :json
     # I forget what the converse of Hash#to_a is, so...
     stats.inject({}){|x, p| x[p[0]] = p[1].to_i; x}.to_json
