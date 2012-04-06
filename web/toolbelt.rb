@@ -127,7 +127,8 @@ class Toolbelt < Sinatra::Base
 
   # linux install instructions
   get "/install.sh" do
-    record_hit "debian" unless request.user_agent =~ /curl|wget/
+    # viewing in the browser shouldn't count as a download
+    record_hit "debian" if request.user_agent =~ /curl|wget/
     content_type "text/plain"
     erb :install
   end
