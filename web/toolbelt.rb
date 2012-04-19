@@ -83,7 +83,8 @@ class Toolbelt < Sinatra::Base
   end
 
   def record_hit os
-    db.exec("INSERT INTO stats (os) VALUES ($1)", [os])
+    db.exec("INSERT INTO stats (os, user_agent, ip) VALUES ($1, $2, $3)",
+            [os, request.user_agent, request.ip])
   rescue StandardError => e
     puts e.backtrace.join("\n")
   end
@@ -128,7 +129,7 @@ class Toolbelt < Sinatra::Base
   # linux install instructions
   get "/install.sh" do
     # viewing in the browser shouldn't count as a download
-    record_hit "debian" if request.user_agent =~ /curl|wget/
+    record_hit "debian" if request.user_agent =~ /curl|wget/i
     content_type "text/plain"
     erb :install
   end
