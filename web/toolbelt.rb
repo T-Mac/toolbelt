@@ -83,8 +83,8 @@ class Toolbelt < Sinatra::Base
   end
 
   def record_hit os
-    db.exec("INSERT INTO stats (os, user_agent, ip) VALUES ($1, $2, $3)",
-            [os, request.user_agent, request.ip])
+    db.exec("INSERT INTO stats (os, user_agent, ip, referer) VALUES ($1, $2, $3, $4)",
+            [os, request.user_agent, request.ip, request.referer])
   rescue StandardError => e
     puts e.backtrace.join("\n")
   end
