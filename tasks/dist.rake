@@ -79,7 +79,7 @@ def tempdir
 end
 
 def version
-  @version ||= %x{ ruby -r#{basedir}/components/heroku/lib/heroku/version.rb -e "puts Heroku::VERSION" }.chomp
+  @version ||= %x{ ruby "-r#{basedir}/components/heroku/lib/heroku/version.rb" -e "puts Heroku::VERSION" }.chomp
 end
 
 def windows?

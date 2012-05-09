@@ -3,15 +3,15 @@ require "erb"
 def build_zip(name)
   rm_rf "#{component_dir(name)}/.bundle"
   rm_rf Dir["#{basedir}/components/#{name}/pkg/*.zip"]
-  component_bundle name, "install --path vendor/bundle"
+  component_bundle name, "install --without \"development\""
   component_bundle name, "exec rake zip:clean zip:build"
   Dir["#{basedir}/components/#{name}/pkg/*.zip"].first
 end
 
 def extract_zip(filename, destination)
   tempdir do |dir|
-    sh %{ unzip #{filename} }
-    sh %{ mv * #{destination} }
+    sh %{ unzip "#{filename}" }
+    sh %{ mv * "#{destination}" }
   end
 end
 
