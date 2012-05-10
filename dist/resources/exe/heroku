@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!HEROKUPATH/ruby-1.9.3/bin/ruby
 
 # attempt to load rubygems
 begin

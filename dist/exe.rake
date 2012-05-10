@@ -29,7 +29,7 @@ file pkg("heroku-toolbelt-#{version}.exe") do |t|
     cp resource("exe/heroku"),     "heroku/bin/heroku"
 
     sevenzip_dir = ENV["7Z_DIR"] || 'C:\\Program Files (x86)\\7-Zip\\'
-    system "\"#{sevenzip_dir}\\7z.exe\" e -o\"#{dir}\\heroku\\ruby-1.9.3\" -bd -y \"#{dir}\\installers\\ruby-mingw32.7z\""
+    system "\"#{sevenzip_dir}\\7z.exe\" x -o\"#{dir}\\heroku\\ruby-1.9.3\" -bd -y \"#{dir}\\installers\\ruby-mingw32.7z\""
 
     File.open("heroku.iss", "w") do |iss|
       iss.write(ERB.new(File.read(resource("exe/heroku.iss"))).result(binding))
