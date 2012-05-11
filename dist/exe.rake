@@ -21,8 +21,14 @@ file pkg("heroku-toolbelt-#{version}.exe") do |t|
     extract_zip build_zip("heroku"), "#{dir}/heroku/"
 
     mkchdir("installers") do
-      system "curl http://heroku-toolbelt.s3.amazonaws.com/ruby-mingw32.7z -o ruby-mingw32.7z"
-      system "curl http://heroku-toolbelt.s3.amazonaws.com/git.exe -o git.exe"
+      ["ruby-mingw32.7z", "git.exe"].each do |i|
+        cache = File.join(File.dirname(__FILE__), "..", ".cache", i)
+        FileUtils.mkdir_p File.dirname(cache)
+        unless File.exists? cache
+          system "curl http://heroku-toolbelt.s3.amazonaws.com/#{i} -o \"#{cache}\""
+        end
+        cp cache, i
+      end
     end
 
     cp resource("exe/heroku.bat"), "heroku/bin/heroku.bat"
@@ -44,6 +50,7 @@ end
 desc "Clean exe"
 task "exe:clean" do
   clean pkg("heroku-toolbelt-#{version}.exe")
+  clean File.dirname(__FILE__), "..", ".cache"
 end
 
 desc "Build exe"
