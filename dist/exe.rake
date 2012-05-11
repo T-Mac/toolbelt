@@ -21,8 +21,14 @@ file pkg("heroku-toolbelt-#{version}.exe") do |t|
     extract_zip build_zip("heroku"), "#{dir}/heroku/"
 
     mkchdir("installers") do
-      system "curl http://heroku-toolbelt.s3.amazonaws.com/rubyinstaller.exe -o rubyinstaller.exe"
-      system "curl http://heroku-toolbelt.s3.amazonaws.com/git.exe -o git.exe"
+      ["rubyinstaller.exe", "git.exe"].each do |i|
+        cache = File.join(File.dirname(__FILE__), "..", ".cache", i)
+        FileUtils.mkdir_p File.dirname(cache)
+        unless File.exists? cache
+          system "curl http://heroku-toolbelt.s3.amazonaws.com/#{i} -o \"#{cache}\""
+        end
+        cp cache, i
+      end
     end
 
     cp resource("exe/heroku.bat"), "heroku/bin/heroku.bat"
@@ -33,7 +39,6 @@ file pkg("heroku-toolbelt-#{version}.exe") do |t|
     end
 
     inno_dir = ENV["INNO_DIR"] || 'C:\\Program Files (x86)\\Inno Setup 5\\'
-
     system "\"#{inno_dir}\\Compil32.exe\" /cc \"heroku.iss\""
   end
 end
@@ -41,6 +46,7 @@ end
 desc "Clean exe"
 task "exe:clean" do
   clean pkg("heroku-toolbelt-#{version}.exe")
+  clean File.dirname(__FILE__), "..", ".cache"
 end
 
 desc "Build exe"
