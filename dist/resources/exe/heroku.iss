@@ -42,9 +42,9 @@ Root: HKCU; Subkey: "Environment"; ValueType: "expandsz"; ValueName: "HOME"; \
   ValueData: "%USERPROFILE%"; Flags: createvalueifdoesntexist
 
 [Run]
-Filename: "{app}\ruby-1.9.3\bin\ruby.exe"; Parameters: "-e ""File.open('{app}/bin/heroku.bat', 'w') do |f| f.puts File.read('{app}/bin/heroku.bat').gsub('HEROKUPATH', '{app}') end"" "; \
+Filename: "{app}\ruby-1.9.3\bin\ruby.exe"; Parameters: "-pi -e '$_.gsub! ""HEROKUPATH"", ""{app}""' {app}\bin\heroku.bat"; \
   Flags: runhidden shellexec waituntilterminated; StatusMsg: "Setting isolated Ruby path"; Components: "toolbelt/client"
-Filename: "{app}\ruby-1.9.3\bin\ruby.exe"; Parameters: "-e ""File.open('{app}/bin/heroku', 'w') do |f| f.puts File.read('{app}/bin/heroku').gsub('HEROKUPATH', '{app}') end"" "; \
+Filename: "{app}\ruby-1.9.3\bin\ruby.exe"; Parameters: "-pi -e '$_.gsub! ""HEROKUPATH"", ""{app}""' {app}\bin\heroku"; \
   Flags: runhidden shellexec waituntilterminated; StatusMsg: "Setting isolated Ruby path"; Components: "toolbelt/client"
 Filename: "{app}\ruby-1.9.3\bin\gem.bat"; Parameters: "install taps --no-rdoc --no-ri"; \
   Flags: runhidden shellexec waituntilterminated; StatusMsg: "Installing Taps"; Components: "toolbelt/client"
