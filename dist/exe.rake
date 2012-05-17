@@ -50,7 +50,7 @@ end
 desc "Clean exe"
 task "exe:clean" do
   clean pkg("heroku-toolbelt-#{version}.exe")
-  clean File.dirname(__FILE__), "..", ".cache"
+  clean File.dirname(__FILE__, "..", ".cache")
 end
 
 desc "Build exe"
