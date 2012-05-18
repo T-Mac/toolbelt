@@ -1,0 +1,13 @@
+#!/bin/sh
+# find embedded ruby relative to script
+bindir=`cd -P "${0%/*}/../ruby-1.9.3/bin" 2>/dev/null; pwd`
+exec "$bindir/ruby" -x "$0" "$@"
+
+#!/usr/bin/env ruby
+
+$:.unshift File.expand_path("../../lib", __FILE__)
+
+require "foreman/cli"
+
+Foreman::CLI.start
+

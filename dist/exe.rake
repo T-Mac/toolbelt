@@ -31,8 +31,10 @@ file pkg("heroku-toolbelt-#{version}.exe") do |t|
       end
     end
 
-    cp resource("exe/heroku.bat"), "heroku/bin/heroku.bat"
-    cp resource("exe/heroku"),     "heroku/bin/heroku"
+    cp resource("exe/heroku.bat"),  "heroku/bin/heroku.bat"
+    cp resource("exe/heroku"),      "heroku/bin/heroku"
+    cp resource("exe/foreman.bat"), "heroku/bin/foreman.bat"
+    cp resource("exe/foreman"),     "heroku/bin/foreman"
 
     sevenzip_dir = ENV["7Z_DIR"] || 'C:\\Program Files (x86)\\7-Zip\\'
     system "\"#{sevenzip_dir}\\7z.exe\" x -o\"#{dir}\\heroku\" -bd -y \"#{dir}\\installers\\ruby-mingw32.7z\""
