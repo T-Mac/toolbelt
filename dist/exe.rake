@@ -21,30 +21,19 @@ file pkg("heroku-toolbelt-#{version}.exe") do |t|
     extract_zip build_zip("heroku"), "#{dir}/heroku/"
 
     mkchdir("installers") do
-      ["ruby-mingw32.7z", "git.exe"].each do |i|
-        cache = File.join(File.dirname(__FILE__), "..", ".cache", i)
-        FileUtils.mkdir_p File.dirname(cache)
-        unless File.exists? cache
-          system "curl http://heroku-toolbelt.s3.amazonaws.com/#{i} -o \"#{cache}\""
-        end
-        cp cache, i
-      end
+      system "curl http://heroku-toolbelt.s3.amazonaws.com/rubyinstaller.exe -o rubyinstaller.exe"
+      system "curl http://heroku-toolbelt.s3.amazonaws.com/git.exe -o git.exe"
     end
 
-    cp resource("exe/heroku.bat"),  "heroku/bin/heroku.bat"
-    cp resource("exe/heroku"),      "heroku/bin/heroku"
-    cp resource("exe/foreman.bat"), "heroku/bin/foreman.bat"
-    cp resource("exe/foreman"),     "heroku/bin/foreman"
-
-    sevenzip_dir = ENV["7Z_DIR"] || 'C:\\Program Files (x86)\\7-Zip\\'
-    system "\"#{sevenzip_dir}\\7z.exe\" x -o\"#{dir}\\heroku\" -bd -y \"#{dir}\\installers\\ruby-mingw32.7z\""
-    mv "#{dir}\\heroku\\ruby-1.9.3-p194-i386-mingw32", "#{dir}\\heroku\\ruby-1.9.3"
+    cp resource("exe/heroku.bat"), "heroku/bin/heroku.bat"
+    cp resource("exe/heroku"),     "heroku/bin/heroku"
 
     File.open("heroku.iss", "w") do |iss|
       iss.write(ERB.new(File.read(resource("exe/heroku.iss"))).result(binding))
     end
 
     inno_dir = ENV["INNO_DIR"] || 'C:\\Program Files (x86)\\Inno Setup 5\\'
+
     system "\"#{inno_dir}\\Compil32.exe\" /cc \"heroku.iss\""
   end
 end
@@ -52,7 +41,6 @@ end
 desc "Clean exe"
 task "exe:clean" do
   clean pkg("heroku-toolbelt-#{version}.exe")
-  clean File.join(File.dirname(__FILE__), "..", ".cache")
 end
 
 desc "Build exe"
