@@ -10,6 +10,7 @@ OutputDir=<%= File.dirname(t.name) %>
 ChangesEnvironment=yes
 UsePreviousSetupType=no
 AlwaysShowComponentsList=no
+SignTool=Standard
 
 ; For Ruby expansion ~ 32MB (installed) - 12MB (installer)
 ExtraDiskSpaceRequired=20971520

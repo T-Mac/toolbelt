@@ -39,6 +39,16 @@ artifacts up to S3. This requires the `HEROKU_RELEASE_ACCESS` and
 `HEROKU_RELEASE_SECRET` environment variables to be set to the proper
 AWS credentials.
 
+## Windows Packaging
+
+A few dependencies must be manually installed.
+
+* [7zip](http://7-zip.org/)
+* [signtool](http://msdn.microsoft.com/en-us/windowsserver/bb980924.aspx)
+
+You also need a copy of the `Certificates.p12` file placed in the
+C drive root and cert's password set in the `CERT_PASSWORD` environment variable.
+
 # License
 
 The MIT License (MIT)
