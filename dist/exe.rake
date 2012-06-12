@@ -40,7 +40,6 @@ file pkg("heroku-toolbelt-#{version}.exe") do |t|
 
     inno_dir = ENV["INNO_DIR"] || 'C:\\Program Files (x86)\\Inno Setup 5\\'
     signtool = ENV["SIGNTOOL"] || 'C:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Bin\\signtool.exe'
-    cert     = ENV["CERT"]     || "#{File.dirname(__FILE__)}\\..\\Certificates.p12"
     password = ENV["CERT_PASSWORD"]
     # TODO: can't have a space in the certificate path; keeping it in C: root sucks
     sign_with = "/sStandard=#{signtool} sign /d Heroku-Toolbelt /f C:\\Certificates.p12 /v /p #{password} $f"

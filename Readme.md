@@ -25,7 +25,7 @@ The toolbelt stores download statistics in Postgres:
 First pull in the dependencies with bundler, then pull in the
 submodules for `foreman` and the `heroku` CLI client repositories:
 
-    $ bundle install --path vendor/bundle
+    $ bundle install
     $ git submodule update --init --recursive
 
 The packaging tasks vary by platform:
@@ -41,8 +41,13 @@ AWS credentials.
 
 ## Windows Packaging
 
-A few dependencies must be manually installed.
+Apart from needing
+[Ruby](http://heroku-toolbelt.s3.amazonaws.com/rubyinstaller.exe) and
+[Git](http://heroku-toolbelt.s3.amazonaws.com/git.exe), a few
+dependencies must be manually installed.
 
+* [Ruby DevKit](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit)
+* [Inno Setup](http://www.jrsoftware.org/isdl.php)
 * [7zip](http://7-zip.org/)
 * [signtool](http://msdn.microsoft.com/en-us/windowsserver/bb980924.aspx)
 
