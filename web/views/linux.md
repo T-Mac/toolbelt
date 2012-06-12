@@ -8,6 +8,12 @@
 * [Foreman](http://github.com/ddollar/foreman) - an easy option for running your apps locally
 * [Git](http://code.google.com/p/git-osx-installer) - revision control and pushing to Heroku
 
+### Other Distros
+
+We hope to support other package managers in the future. In the mean time, you can use [RubyGems](http://rubygems.org) to install the Heroku client and Foreman:
+
+    $ gem install heroku foreman
+
 ### Getting started
 
 Once installed, you'll have access to the heroku command from your command shell. Log in using the email address and password you used when creating your Heroku account:
