@@ -126,6 +126,11 @@ class Toolbelt < Sinatra::Base
     redirect "http://assets.heroku.com/heroku-toolbelt/heroku-toolbelt.pkg"
   end
 
+  get "/download/zip" do
+    record_hit "zip"
+    redirect "http://assets.heroku.com/heroku-client/heroku-client.zip"
+  end
+
   # linux install instructions
   get "/install.sh" do
     # viewing in the browser shouldn't count as a download
