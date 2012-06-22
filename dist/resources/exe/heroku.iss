@@ -23,8 +23,8 @@ Name: custom; Description: "Custom Installation"; flags: iscustom
 Name: "toolbelt"; Description: "Heroku Toolbelt"; Types: "client custom"
 Name: "toolbelt/client"; Description: "Heroku Client"; Types: "client custom"; Flags: fixed
 Name: "toolbelt/foreman"; Description: "Foreman"; Types: "client custom"
-Name: "toolbelt/git"; Description: "Git"; Types: "client custom"; Check: "not IsProgramInstalled('git.exe')"
-Name: "toolbelt/git"; Description: "Git"; Check: "IsProgramInstalled('git.exe')"
+Name: "toolbelt/git"; Description: "Git and SSH"; Types: "client custom"; Check: "not IsProgramInstalled('git.exe')"
+Name: "toolbelt/git"; Description: "Git and SSH"; Check: "IsProgramInstalled('git.exe')"
 
 [Files]
 Source: "heroku\*.*"; DestDir: "{app}"; Flags: recursesubdirs; Components: "toolbelt/client"
