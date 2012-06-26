@@ -24,7 +24,7 @@ Once installed, you'll have access to the heroku command from your command shell
 You're now ready to create your first Heroku app:
 
     $ cd ~/myapp
-    $ heroku create --stack cedar
+    $ heroku create
     Creating stark-fog-398... done, stack is cedar
     http://stark-fog-398.herokuapp.com/ | git@heroku.com:stark-fog-398.git
     Git remote heroku added
